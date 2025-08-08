@@ -3,6 +3,7 @@ import { Request, Response } from "express"
 import { getUserByEmail } from "../models/userModel"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import "../types"
 
 export const registerUser = async(req: Request, res: Response) => {
         const {password, email} = req.body
@@ -96,3 +97,34 @@ export const logOutUser = (req: Request, res: Response) => {
             res.sendStatus(500)
         }
     }
+
+export const verifyAuth = (req: Request, res: Response) => {
+        if (!req.user) {
+            res.status(401).json({ message: "User not authenticated" });
+            return;
+        }
+
+        const {userid, email} = req.user;
+        const {ACCES_TOKEN_SECRET} = process.env;
+        
+        if(!ACCES_TOKEN_SECRET){
+            console.log("No acces token")
+            res.sendStatus(500)
+            return
+        }
+        const newToken = jwt.sign({userid, email}, ACCES_TOKEN_SECRET, {
+            expiresIn: "15m"
+        })
+
+        res.cookie("token", newToken, {
+            maxAge: 15 * 60 * 1000, //15 minutes in milliseconds
+            httpOnly: true
+        })
+
+        res.status(200).json({
+            message: "new token",
+            user: {userid, email},
+            token: newToken
+        })
+
+}

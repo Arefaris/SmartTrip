@@ -2,6 +2,7 @@ import e from "express"
 import { planRouter } from "./routes/planRoute"
 import { userRouter } from "./routes/userRoute"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 
 const app = e()
 
@@ -11,6 +12,7 @@ app.use(cors({
 }))
 
 app.use(e.json()) // body parser for post requests
+app.use(cookieParser()) // cookie parser for reading cookies
 const PORT = 5001 //TODO: add port from env
 
 
