@@ -13,6 +13,7 @@ import crypto from 'crypto';
 
 //model to submit user plan to db
 export const createPlan = async (plan: Plan)=> {
+    const trx = await db.transaction()
     try {
 
         // in the future we will lookup our plan by hash, for speed up
@@ -28,7 +29,7 @@ export const createPlan = async (plan: Plan)=> {
             return result
         }
         // if not, create it
-        const trx = await db.transaction()
+        
         const [returnPlan] = await trx("plan").insert({
             location: plan.location.toLowerCase(),
             days: plan.days,
@@ -43,6 +44,7 @@ export const createPlan = async (plan: Plan)=> {
 
         return returnPlan["generated_plan"]
     }catch (error){
+        await trx.rollback()
         console.log(error)
     }
 }

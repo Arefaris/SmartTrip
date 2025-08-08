@@ -1,4 +1,4 @@
-import { Express, Request, Response } from "express"
+import { Request, Response } from "express"
 import { Plan } from "../types"
 import { createPlan } from "../models/planModel"
 

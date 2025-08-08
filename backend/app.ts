@@ -1,7 +1,6 @@
 import e from "express"
-import { createPlan } from "./models/planModel"
-import { Plan } from "./types"
 import { planRouter } from "./routes/planRoute"
+import { userRouter } from "./routes/userRoute"
 const app = e()
 
 app.use(e.json()) // body parser for post requests
@@ -13,3 +12,4 @@ app.listen(PORT, ()=>{
 })
 
 app.use("/api/", planRouter)
+app.use("/api/", userRouter)
