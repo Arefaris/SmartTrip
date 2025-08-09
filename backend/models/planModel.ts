@@ -2,6 +2,7 @@ import { db } from "../config/db"
 import { Plan } from "../types"
 //this is for hash generation
 import crypto from 'crypto';
+import { gptResponse } from "./gptModel";
 
 //dummy data
 // {
@@ -13,6 +14,8 @@ import crypto from 'crypto';
 
 //model to submit user plan to db
 export const createPlan = async (plan: Plan, userid: string) => {
+    const response =  await gptResponse(plan)
+   
     const trx = await db.transaction()
     try {
 
@@ -37,7 +40,7 @@ export const createPlan = async (plan: Plan, userid: string) => {
             budget: plan.budget.toLowerCase(),
             traveler_type: plan.traveler_type.toLowerCase(),
             hash: hash,
-            generated_plan: { this_will_be_gpt_json: "response" }
+            generated_plan: response.output_text
         }, ["generated_plan", "id"])
 
         //saving this plan to user, for future lookup
@@ -89,7 +92,7 @@ export const getUserPlans = async (userid: string) => {
                 "up.saved_at"
             )
             .where("up.user_id", userid);
-            
+
         await trx.commit();
         return userPlans;
 
