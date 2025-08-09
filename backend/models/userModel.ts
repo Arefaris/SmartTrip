@@ -32,6 +32,7 @@ export const getUserByEmail = async(email: string) => {
 
             return user
         }catch (error) {
+            console.log(error)
             throw error
         }
     }
