@@ -8,7 +8,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
           return res.status(401).json({ message: "Access token required" });
       }
 
-      const ACCESS_TOKEN_SECRET = process.env.ACCES_TOKEN_SECRET;
+      const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
       if (!ACCESS_TOKEN_SECRET) {
           return res.status(500).json({ message: "Server configuration error" });
       }

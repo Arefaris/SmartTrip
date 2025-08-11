@@ -3,11 +3,29 @@ import { Request, Response } from "express"
 import { getUserByEmail } from "../models/userModel"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import { registerSchema } from "../config/joi"
+import { loginSchema } from "../config/joi"
 import "../types"
 
 export const registerUser = async(req: Request, res: Response) => {
-        const {password, email} = req.body
         
+
+        //validating password and email
+        const result = registerSchema.validate(req.body)
+
+        if (result.error) {
+          
+            const errorMessage = result.error.details[0].message;
+
+            res.status(400).json({
+                message: errorMessage
+            });
+
+            return
+        }
+        
+        const {password, email} = req.body
+
         try { 
             const user = await createUser(password, email)
 
@@ -21,21 +39,39 @@ export const registerUser = async(req: Request, res: Response) => {
 
             if(error.code === "23505"){
                 res.status(404).json({message: "User already exist"})
+                return
             }
             res.status(500).json({message: "Internal server error"})
+            
         }
     }
 
 export const loginUser = async (req: Request, res: Response) => {
-        const {email, password} = req.body
+       
         
+        //validating password and email
+        const result = loginSchema.validate(req.body)
+
+        if (result.error) {
+          
+            const errorMessage = result.error.details[0].message;
+
+            res.status(400).json({
+                message: errorMessage
+            });
+
+            return
+        }
+         
+        const {email, password} = req.body
+
         // checking if user with this email exist
         try {
             const user = await getUserByEmail(email)
 
             if(!user) {
                 res.status(404).json({message: 
-                    "User not found"
+                    "Invalid credentials"
                 })
                 return
             }
@@ -45,21 +81,21 @@ export const loginUser = async (req: Request, res: Response) => {
 
             if (!match) {
                  res.status(404).json({message: 
-                    "Wrong password"
+                    "Invalid credentials"
                 })
                 return
             }
 
             //generate token
-            const ACCES_TOKEN_SECRET = process.env.ACCES_TOKEN_SECRET
-            if(!ACCES_TOKEN_SECRET){
+            const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET
+            if(!ACCESS_TOKEN_SECRET){
                 res.status(500).json({message: "Iternal server Error, no acces token found"})
                 return
             }
 
             const accessToken = jwt.sign(
                 {userid: user.id, email: user.email},
-                ACCES_TOKEN_SECRET,
+                ACCESS_TOKEN_SECRET,
                 {expiresIn: "7d"}
             )
 
@@ -105,14 +141,14 @@ export const verifyAuth = (req: Request, res: Response) => {
         }
 
         const {userid, email} = req.user;
-        const {ACCES_TOKEN_SECRET} = process.env;
+        const {ACCESS_TOKEN_SECRET} = process.env;
         
-        if(!ACCES_TOKEN_SECRET){
+        if(!ACCESS_TOKEN_SECRET){
             console.log("No acces token")
             res.sendStatus(500)
             return
         }
-        const newToken = jwt.sign({userid, email}, ACCES_TOKEN_SECRET, {
+        const newToken = jwt.sign({userid, email}, ACCESS_TOKEN_SECRET, {
             expiresIn: "15m"
         })
 
