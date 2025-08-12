@@ -5,7 +5,7 @@ export default function Home() {
 
   return (<>
         <h1>SmartTrip</h1>
-          <button>Login</button>
+          <button onClick={() => {navigate("/login")}}>Login</button>
           <button onClick={() => {navigate("/register")}}>Register</button>
         </>
     

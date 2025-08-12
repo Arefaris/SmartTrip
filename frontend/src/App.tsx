@@ -3,6 +3,7 @@ import {Route, Routes, Link, useNavigate } from 'react-router'
 import Register from './components/register/Register'
 import Home from './components/home/Home'
 import './App.css'
+import Login from './components/login/Login'
 
 function App() {
   
@@ -11,6 +12,7 @@ function App() {
           <Routes>
               <Route path='/' element={< Home />}></Route>
               <Route path='/register' element={< Register />}></Route>
+              <Route path='/login' element={< Login />}></Route>
           </Routes>
       </div>
   )

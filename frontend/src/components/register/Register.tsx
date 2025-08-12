@@ -55,8 +55,9 @@ export default function Register() {
   return (
     <div>
       <form onSubmit={(e: FormEvent<HTMLFormElement>) => { handleRegistration(e) }}>
-        <input type="email" ref={emailRef} placeholder="email" />
+        <input required type="email" ref={emailRef} placeholder="email" />
         <input
+          required
           type="password"
           ref={passRef}
           placeholder="password"
