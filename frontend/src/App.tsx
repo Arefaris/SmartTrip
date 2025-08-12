@@ -8,11 +8,9 @@ function App() {
   
   return (
       <div>
-          
           <Routes>
               <Route path='/' element={< Home />}></Route>
               <Route path='/register' element={< Register />}></Route>
-              
           </Routes>
       </div>
   )
