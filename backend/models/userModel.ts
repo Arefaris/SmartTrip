@@ -15,9 +15,8 @@ export const createUser = async (password: string, email: string) => {
             await trx.commit()
             return user
 
-        } catch (error) {
+        } catch (error: any) {
             await trx.rollback()
-            console.log(error)
             throw error
         }
 }
