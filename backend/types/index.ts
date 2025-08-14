@@ -1,6 +1,8 @@
 export type Plan = {
     location: string,
     days: number,
+    start_date: string,
+    end_date: string,
     interests: string[],
     budget: string,
     traveler_type: string

@@ -36,6 +36,8 @@ export const createPlan = async (plan: Plan, userid: string) => {
         const [returnPlan] = await trx("plan").insert({
             location: plan.location.toLowerCase(),
             days: plan.days,
+            start_date: plan.start_date,
+            end_date: plan.end_date,
             interests: plan.interests.map(interest => interest.toLowerCase()),
             budget: plan.budget.toLowerCase(),
             traveler_type: plan.traveler_type.toLowerCase(),

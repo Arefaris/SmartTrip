@@ -29,7 +29,9 @@ export const gptResponse = async (plan: Plan) => {
               "text": `
               Generate a plan for: 
               Location: ${plan.location}
-              Days: ${plan.days} 
+              Days: ${plan.days}
+              Start Date: ${plan.start_date}
+              End Date: ${plan.end_date}
               Traveler type: ${plan.interests}
               Budget: ${plan.budget}
               Traveler: ${plan.traveler_type}`
