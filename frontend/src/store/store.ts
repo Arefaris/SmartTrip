@@ -45,11 +45,8 @@ const travelerTypes = [
 interface StoreState {
   plan: plan,
   interests: {value: string, label: string}[]
-  selectedInterests: {value: string, label: string}[]
   travelerTypes: string[],
   setPlan: (plan: plan) => void
-  setSelectedInterests: (interests: {value: string, label: string}[]) => void
-//   clearPlan: () => void
 }
 
 const useStore = create<StoreState>((set) => ({
@@ -63,11 +60,8 @@ const useStore = create<StoreState>((set) => ({
     traveler_type: ''
   },
   interests: interests,
-  selectedInterests: [],
   travelerTypes: travelerTypes,
   setPlan: (plan: plan) => set({ plan }),
-  setSelectedInterests: (selectedInterests) => set({ selectedInterests }),
-//   clearPlan: () => set({ plan: null }),
 }))
 
 export default useStore

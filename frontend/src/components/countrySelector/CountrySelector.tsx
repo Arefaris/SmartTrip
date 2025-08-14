@@ -2,6 +2,9 @@ import { useRef, useState } from 'react'
 import axios from 'axios';
 import type { city_country } from '../../types';
 import useStore from '../../store/store';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
 const url = import.meta.env.VITE_BASE_URL
 
 
@@ -19,6 +22,10 @@ const fetchCityCountry = async (query: string)=> {
 
       if(result.status === 200){
         setOptions(result.data.result)
+        setPlan({
+        ...plan,
+        location: `${result.data.result[0].name}, ${result.data.result[0].country_name}`
+        })
       }
 
     }catch(error){
@@ -28,23 +35,26 @@ const fetchCityCountry = async (query: string)=> {
   }
 
   //setting location
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>)=> {
+  const handleChange = ()=> {
+    if(!location.current?.value) return
+    console.log(location.current?.value)
     setPlan({
       ...plan,
-      location: e.target.value
+      location: location.current?.value
     })
   }
 
     return (
         <>
             <input
+                id="country-search"
                 type="text"
                 placeholder="Enter city or country"
                 onChange={(e) => fetchCityCountry(e.target.value)}
             ></input>
             {/* <button onClick={() => {navigate("/login")}}>Login</button>
               <button onClick={() => {navigate("/register")}}>Register</button> */}
-            <select ref={location} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleChange(e)}>
+            <select id="country-select" ref={location} onChange={() => handleChange()}>
                 {options.length > 0 && options.map((option: city_country) => {
                     return <option key={option.id}>{option.name}, {option.country_name}</option>
                 })}
