@@ -81,9 +81,8 @@ const lookUpPlan = async (hash: string) => {
 }
 
 export const getUserPlans = async (userid: string) => {
-    const trx = await db.transaction()
     try {
-        const userPlans = await trx("user_plans as up")
+        const userPlans = await db("user_plans as up")
             .join("plan as p", "up.plan_id", "p.id")
             .select(
                 "p.id as plan_id",
@@ -95,11 +94,9 @@ export const getUserPlans = async (userid: string) => {
             )
             .where("up.user_id", userid);
 
-        await trx.commit();
         return userPlans;
 
     } catch (error) {
-        await trx.rollback();
         console.log("Error fetching user plans:", error);
         throw error;
     }
