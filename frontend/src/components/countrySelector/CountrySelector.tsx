@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import axios from 'axios';
+import "./style.css"
 import type { city_country } from '../../types';
 import useStore from '../../store/store';
 import TextField from '@mui/material/TextField';
@@ -9,57 +10,57 @@ const url = import.meta.env.VITE_BASE_URL
 
 
 export default function CountrySelector() {
-const [options, setOptions] = useState([]);
-const location = useRef<HTMLSelectElement>(null)
-const { plan, setPlan } = useStore()
+  const [options, setOptions] = useState<city_country[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const { plan, setPlan } = useStore()
 
-//fetching for auto-complete
-const fetchCityCountry = async (query: string)=> {
-    if (query.length < 3) return; 
-
-    try {
-      const result = await axios.post(`${url}/api/county-list`, {query})
-
-      if(result.status === 200){
-        setOptions(result.data.result)
-        setPlan({
-        ...plan,
-        location: `${result.data.result[0].name}, ${result.data.result[0].country_name}`
-        })
+  //fetching for auto-complete
+  const fetchCityCountry = async (query: string)=> {
+      if (query.length < 3) {
+        setOptions([]);
+        return;
       }
 
-    }catch(error){
-      console.log(error)
-    }
-    
+      try {
+        const result = await axios.post(`${url}/api/county-list`, {query})
+
+        if(result.status === 200){
+          setOptions(result.data.result)
+        }
+
+      }catch(error){
+        console.log(error)
+      }
   }
 
   //setting location
-  const handleChange = ()=> {
-    if(!location.current?.value) return
-    console.log(location.current?.value)
-    setPlan({
-      ...plan,
-      location: location.current?.value
-    })
+  const handleChange = (event: any, value: city_country | null) => {
+    if (value) {
+      setPlan({
+        ...plan,
+        location: `${value.name}, ${value.country_name}`
+      })
+    }
   }
 
     return (
-        <>
-            <input
-                id="country-search"
-                type="text"
-                placeholder="Enter city or country"
-                onChange={(e) => fetchCityCountry(e.target.value)}
-            ></input>
-            {/* <button onClick={() => {navigate("/login")}}>Login</button>
-              <button onClick={() => {navigate("/register")}}>Register</button> */}
-            <select id="country-select" ref={location} onChange={() => handleChange()}>
-                {options.length > 0 && options.map((option: city_country) => {
-                    return <option key={option.id}>{option.name}, {option.country_name}</option>
-                })}
-            </select>
-
-        </>
+        <div>
+        <Autocomplete
+           id="country-autocomplete"
+          options={options}
+          getOptionLabel={(option) => `${option.name}, ${option.country_name}`}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+            fetchCityCountry(newInputValue);
+          }}
+          onChange={handleChange}
+          renderInput={(params) => (
+            <TextField {...params} label="Enter city or country" placeholder="Search..." className="country-textfield" />
+          )}
+          noOptionsText="Type at least 3 characters to search"
+        />
+        </div>
+       
     )
 }

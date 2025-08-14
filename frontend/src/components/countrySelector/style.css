@@ -1,0 +1,16 @@
+  .country-textfield
+  .MuiInputBase-input {
+    color: white; /* Input text color       
+  */
+  }
+
+  .country-textfield
+  .MuiInputLabel-root {
+    color: white; /* Label color */
+  }
+
+  .country-textfield
+  .MuiOutlinedInput-root fieldset {        
+    border-color: #ccc; /* Border
+  color */
+  }

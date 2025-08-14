@@ -5,35 +5,19 @@ import CountrySelector from '../countrySelector/CountrySelector';
 import DateSelector from '../dateSelector/DateSelector';
 import InterestSelector from '../interests/InterestsSelector';
 import BudgetSelector from '../budgetSelector/BudgetSelector';
+import TravelTypeSelector from '../travelTypeSelector/TravelTypeSelector';
 
 export default function Home() {
   const navigate = useNavigate()
+    const { plan, setPlan, travelerTypes } = useStore()
   
-  const { plan, setPlan, travelerTypes } = useStore()
 
-  
-  const travelerType = useRef<HTMLSelectElement>(null)
 
   
 
   const run = ()=> {
-    // 
-    // 
-    // if(!budget.current?.value) return
-    // if(!travelerType.current?.value) return
     console.log(plan)
-    //calculating days based on user selection
-    
   }
-  //   setPlan({
-  //   location:" location.current?.value",
-
-  //   interests: selectedInterests.map(interest => interest.value),
-  //   budget: budget.current?.value,
-  //   traveler_type: travelerType.current?.value,
-  //   })
-  // }
-
   return (<>
           <h1>SmartTrip</h1>
           
@@ -45,13 +29,7 @@ export default function Home() {
           
           <BudgetSelector />
           
-           <select ref={travelerType}>
-            {travelerTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-           </select>
+          <TravelTypeSelector />
 
 
           <button onClick={() => {run()}}>Plan trip</button>

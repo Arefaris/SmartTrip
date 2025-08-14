@@ -1,0 +1,16 @@
+  .date-picker-textfield
+  .MuiInputBase-input {
+    color: white; /* Input text color       
+  */
+  }
+
+  .date-picker-textfield
+  .MuiInputLabel-root {
+    color: white; /* Label color */
+  }
+
+  .date-picker-textfield
+  .MuiOutlinedInput-root fieldset {        
+    border-color: #ccc; /* Border
+  color */
+  }
