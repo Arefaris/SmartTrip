@@ -1,48 +1,27 @@
 import { useRef, useState } from 'react'
 import {Route, Routes, Link, useNavigate } from 'react-router'
 import useStore from '../../store/store';
+import CountrySelector from '../countrySelector/CountrySelector';
 import axios from 'axios';
 import InterestSelector from '../interests/InterestsSelector';
 
-const url = import.meta.env.VITE_BASE_URL
-
-type city_country = {
-  id: number,
-  name: string,
-  country_name: string
-}
 
 export default function Home() {
   const navigate = useNavigate()
-  const [options, setOptions] = useState([]);
+  
   const { setPlan, selectedInterests, travelerTypes } = useStore()
 
   //date ref for calendar
   const startDate = useRef<HTMLInputElement>(null)
   const endDate = useRef<HTMLInputElement>(null)
-  const location = useRef<HTMLSelectElement>(null)
   const budget = useRef<HTMLSelectElement>(null)
   const travelerType = useRef<HTMLSelectElement>(null)
 
-  const fetchCityCountry = async (query: string)=> {
-    if (query.length < 3) return; 
-
-    try {
-      const result = await axios.post(`${url}/api/county-list`, {query})
-
-      if(result.status === 200){
-        setOptions(result.data.result)
-      }
-
-    }catch(error){
-      console.log(error)
-    }
-    
-  }
+  
 
   const plan = ()=> {
     if(!startDate.current?.value || !endDate.current?.value) return
-    if(!location.current?.value) return
+    // if(!location.current?.value) return
     if(!budget.current?.value) return
     if(!travelerType.current?.value) return
 
@@ -52,7 +31,7 @@ export default function Home() {
     const days = (new Date(enDate).getTime() - new Date(stDate).getTime()) / (1000 * 60 * 60 * 24) + 1;
     
     setPlan({
-    location: location.current?.value,
+    location:" location.current?.value",
     days: days,
     start_date: stDate,
     end_date: enDate,
@@ -64,18 +43,8 @@ export default function Home() {
 
   return (<>
           <h1>SmartTrip</h1>
-          <input
-          type="text"
-          placeholder="Enter city or country"
-          onChange={(e) => fetchCityCountry(e.target.value)}
-          ></input>
-          {/* <button onClick={() => {navigate("/login")}}>Login</button>
-          <button onClick={() => {navigate("/register")}}>Register</button> */}
-          <select ref={location}>
-              {options.length > 0 && options.map((option: city_country)=> {
-                return <option key={option.id}>{option.name}, {option.country_name}</option>
-              })}
-          </select>
+          
+          <CountrySelector />
               
           <br />
           <label>Start Date:</label>

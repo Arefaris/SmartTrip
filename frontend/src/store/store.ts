@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 type plan = {
-    location: string,
+    location: string ,
     days: number,
     start_date: string,
     end_date: string,
@@ -43,23 +43,31 @@ const travelerTypes = [
 
 
 interface StoreState {
-  plan: plan | null,
+  plan: plan,
   interests: {value: string, label: string}[]
   selectedInterests: {value: string, label: string}[]
   travelerTypes: string[],
   setPlan: (plan: plan) => void
   setSelectedInterests: (interests: {value: string, label: string}[]) => void
-  clearPlan: () => void
+//   clearPlan: () => void
 }
 
 const useStore = create<StoreState>((set) => ({
-  plan: null,
+  plan: {
+    location: '',
+    days: 0,
+    start_date: '',
+    end_date: '',
+    interests: [],
+    budget: '',
+    traveler_type: ''
+  },
   interests: interests,
   selectedInterests: [],
   travelerTypes: travelerTypes,
   setPlan: (plan: plan) => set({ plan }),
   setSelectedInterests: (selectedInterests) => set({ selectedInterests }),
-  clearPlan: () => set({ plan: null }),
+//   clearPlan: () => set({ plan: null }),
 }))
 
 export default useStore
