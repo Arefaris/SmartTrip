@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import {Route, Routes, Link, useNavigate } from 'react-router'
 import useStore from '../../store/store';
 import axios from 'axios';
+import InterestSelector from '../interests/InterestsSelector';
 
 const url = import.meta.env.VITE_BASE_URL
 
@@ -14,13 +15,14 @@ type city_country = {
 export default function Home() {
   const navigate = useNavigate()
   const [options, setOptions] = useState([]);
-  const { setPlan } = useStore()
+  const { setPlan, selectedInterests, travelerTypes } = useStore()
 
   //date ref for calendar
   const startDate = useRef<HTMLInputElement>(null)
   const endDate = useRef<HTMLInputElement>(null)
-
-  
+  const location = useRef<HTMLSelectElement>(null)
+  const budget = useRef<HTMLSelectElement>(null)
+  const travelerType = useRef<HTMLSelectElement>(null)
 
   const fetchCityCountry = async (query: string)=> {
     if (query.length < 3) return; 
@@ -40,21 +42,23 @@ export default function Home() {
 
   const plan = ()=> {
     if(!startDate.current?.value || !endDate.current?.value) return
+    if(!location.current?.value) return
+    if(!budget.current?.value) return
+    if(!travelerType.current?.value) return
 
     //calculating days based on user selection
     const enDate = endDate.current?.value
     const stDate = startDate.current?.value
     const days = (new Date(enDate).getTime() - new Date(stDate).getTime()) / (1000 * 60 * 60 * 24) + 1;
-
     
     setPlan({
-    location: string,
+    location: location.current?.value,
     days: days,
     start_date: stDate,
     end_date: enDate,
-    interests: string[],
-    budget: string,
-    traveler_type: string,
+    interests: selectedInterests.map(interest => interest.value),
+    budget: budget.current?.value,
+    traveler_type: travelerType.current?.value,
     })
   }
 
@@ -67,7 +71,7 @@ export default function Home() {
           ></input>
           {/* <button onClick={() => {navigate("/login")}}>Login</button>
           <button onClick={() => {navigate("/register")}}>Register</button> */}
-          <select>
+          <select ref={location}>
               {options.length > 0 && options.map((option: city_country)=> {
                 return <option key={option.id}>{option.name}, {option.country_name}</option>
               })}
@@ -80,6 +84,22 @@ export default function Home() {
           <label>End Date:</label>
           <input type="date" ref={endDate}></input>
           <br />
+
+          <InterestSelector />
+           <select ref={budget}>
+            <option>Economy / Good for travelers who want to save money or backpack.</option>
+            <option>Standard / 3-star hotels, casual restaurants, some paid attractions. </option>
+            <option>Luxury / Luxury hotels or resorts, fine dining, private tours.</option>
+           </select><br/>
+
+           <select ref={travelerType}>
+            {travelerTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+           </select>
+
 
           <button onClick={() => {plan()}}>Plan trip</button>
         </>
