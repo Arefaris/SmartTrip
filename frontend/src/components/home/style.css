@@ -1,0 +1,35 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 500px;
+}
+
+.MuiInputBase-input {
+  color: black !important;
+}
+
+.MuiInputLabel-root {
+  color: black !important;
+}
+
+ .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
+}
+
+/* Alternative selectors for DatePicker specifically */
+ fieldset {
+  border-color: black !important;
+}
+
+.Mui-focused fieldset {
+  border-color: violet !important;
+}

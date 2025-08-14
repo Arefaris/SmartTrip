@@ -21,16 +21,11 @@ export default function BudgetSelector() {
   return (
     <div className="select">
       <Select
-        id="budget-selector"
-        instanceId="budget-selector"
         value={budgetOptions.find(option => option.value === plan.budget)}
         onChange={handleChange}
         options={budgetOptions}
         placeholder="Select budget range..."
-        className="basic-single"
-        classNamePrefix="select"
       />
-      <br/>
     </div>
   )
 }

@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react'
 import axios from 'axios';
-import "./style.css"
 import type { city_country } from '../../types';
 import useStore from '../../store/store';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import './style.css';
 
 const url = import.meta.env.VITE_BASE_URL
 
@@ -56,7 +56,7 @@ export default function CountrySelector() {
           }}
           onChange={handleChange}
           renderInput={(params) => (
-            <TextField {...params} label="Enter city or country" placeholder="Search..." className="country-textfield" />
+            <TextField {...params} label="Where to?" placeholder="Search..." className="country-textfield" />
           )}
           noOptionsText="Type at least 3 characters to search"
         />

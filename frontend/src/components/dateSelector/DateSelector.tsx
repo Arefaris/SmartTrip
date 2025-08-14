@@ -41,22 +41,21 @@ export default function DateSelector() {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, margin: 2 }}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} >
         <DatePicker
           label="Start Date"
           value={startDate}
           onChange={handleStartDateChange}
-          className="date-picker-textfield"
+          className="date-picker"
         />
         <DatePicker
           label="End Date"
           value={endDate}
           onChange={handleEndDateChange}
           minDate={startDate || undefined}
-          className="date-picker-textfield"
+          className="date-picker"
         />
-      </Box>
+      
     </LocalizationProvider>
   );
 }

@@ -19,16 +19,12 @@ export default function TravelTypeSelector() {
 
   return (
     <div className="select">
-    <Select
-      id="traveler-type-selector"
-      instanceId="traveler-type-selector"
-      value={travelerTypeOptions.find(option => option.value === plan.traveler_type)}
-      onChange={handleChange}
-      options={travelerTypeOptions}
-      placeholder="Select traveler type..."
-      className="basic-single"
-      classNamePrefix="select"
-    />
+        <Select
+        value={travelerTypeOptions.find(option => option.value === plan.traveler_type)}
+        onChange={handleChange}
+        options={travelerTypeOptions}
+        placeholder="Select traveler type..."
+        />
     </div>
   )
 }

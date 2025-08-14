@@ -6,19 +6,15 @@ import DateSelector from '../dateSelector/DateSelector';
 import InterestSelector from '../interests/InterestsSelector';
 import BudgetSelector from '../budgetSelector/BudgetSelector';
 import TravelTypeSelector from '../travelTypeSelector/TravelTypeSelector';
-
+import "./style.css"
 export default function Home() {
   const navigate = useNavigate()
-    const { plan, setPlan, travelerTypes } = useStore()
+   const { plan, setPlan, travelerTypes } = useStore()
   
-
-
-  
-
   const run = ()=> {
     console.log(plan)
   }
-  return (<>
+  return (<div className="home">
           <h1>SmartTrip</h1>
           
           <CountrySelector />
@@ -33,7 +29,7 @@ export default function Home() {
 
 
           <button onClick={() => {run()}}>Plan trip</button>
-        </>
+        </div>
     
   )
 }

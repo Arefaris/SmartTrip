@@ -1,16 +1,19 @@
-  .country-textfield
-  .MuiInputBase-input {
-    color: white; /* Input text color       
-  */
-  }
+.country-textfield .MuiInputBase-input {
+  color: white;
+}
 
-  .country-textfield
-  .MuiInputLabel-root {
-    color: white; /* Label color */
-  }
+.country-textfield .MuiInputLabel-root {
+  color: white;
+}
 
-  .country-textfield
-  .MuiOutlinedInput-root fieldset {        
-    border-color: #ccc; /* Border
-  color */
-  }
+.country-textfield .MuiOutlinedInput-root fieldset {        
+  border-color: #ccc;
+}
+
+.country-textfield .MuiOutlinedInput-root:hover fieldset {        
+  border-color: #fff;
+}
+
+.country-textfield .MuiOutlinedInput-root.Mui-focused fieldset {        
+  border-color: #1976d2;
+}

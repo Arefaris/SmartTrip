@@ -1,16 +1,32 @@
-  .date-picker-textfield
-  .MuiInputBase-input {
-    color: white; /* Input text color       
-  */
-  }
+.date-picker .MuiInputBase-input {
+  color: black !important;
+}
 
-  .date-picker-textfield
-  .MuiInputLabel-root {
-    color: white; /* Label color */
-  }
+.date-picker .MuiInputLabel-root {
+  color: black !important;
+}
 
-  .date-picker-textfield
-  .MuiOutlinedInput-root fieldset {        
-    border-color: #ccc; /* Border
-  color */
-  }
+.date-picker .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
+}
+
+.date-picker .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
+}
+
+.date-picker .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
+}
+
+/* Alternative selectors for DatePicker specifically */
+.date-picker fieldset {
+  border-color: black !important;
+}
+
+.date-picker:hover fieldset {
+  border-color: black !important;
+}
+
+.date-picker .Mui-focused fieldset {
+  border-color: violet !important;
+}

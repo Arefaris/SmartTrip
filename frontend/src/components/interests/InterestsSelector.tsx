@@ -17,15 +17,20 @@ export default function InterestSelector() {
   return (
     <div className="select">
       <Select
-        id="interests-selector"
-        instanceId="interests-selector"
         value={interests.filter(interest => plan.interests.includes(interest.value))}
         onChange={(value) => handleChange(value)}
         isMulti
         name="interests"
         options={interests}
         className="basic-multi-select"
-        classNamePrefix="select"
+        styles={{
+    control: (baseStyles, state) => ({
+      ...baseStyles,
+      
+      borderColor: "black",
+      backgroundColor: "transparent"
+    }),
+  }}
       />
     </div>
   );
