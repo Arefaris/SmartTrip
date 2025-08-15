@@ -1,0 +1,29 @@
+/* Date Selector Styles */
+.date-selector .mantine-Input-input,
+.date-selector .mantine-DatePickerInput-input {
+    height: 85px !important;
+    min-height: 85px !important;
+    width: 200px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.date-selector .mantine-Input-input:focus,
+.date-selector .mantine-DatePickerInput-input:focus {
+    border-color: #F58A50;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.date-selector .mantine-Input-input::placeholder,
+.date-selector .mantine-DatePickerInput-input::placeholder {
+    color: #D5D7E0;
+    font-size: 16px;
+}
+
+.date-selector .mantine-Input-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 16px !important;
+}

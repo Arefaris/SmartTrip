@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useStore from '../../store/store';
 import { MultiSelect } from '@mantine/core';
-
+import "./style.css"
 
 export default function InterestSelector() {
   const { plan, setPlan, interests } = useStore()
@@ -21,7 +21,7 @@ export default function InterestSelector() {
       value={plan.interests}
       onChange={handleChange}
       maxDropdownHeight={200}
-      className="select interests"
+      className="interests-selector"
       maxValues={3}
     />
   );

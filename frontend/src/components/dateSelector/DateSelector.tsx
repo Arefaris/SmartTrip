@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DatePickerInput } from '@mantine/dates';
 import useStore from '../../store/store';
+import './style.css';
 
 import type { DatesRangeValue } from '@mantine/dates';
 
@@ -14,7 +15,16 @@ export default function DateSelector() {
     setValue(dateRange);
     const [startDate, endDate] = dateRange;
     
-    if (!startDate || !endDate) return;
+    // If either date is null, clear the plan dates
+    if (!startDate || !endDate) {
+      setPlan({
+        ...plan,
+        days: 0,
+        start_date: '',
+        end_date: ''
+      });
+      return;
+    }
     
     //Convert string dates to Date objects for calculations
     const startDateObj = new Date(startDate);
@@ -39,7 +49,7 @@ export default function DateSelector() {
       placeholder="Select your departure and return dates"
       value={value}
       onChange={updatePlan}
-      className="select"
+      className="date-selector"
     />
   );
 

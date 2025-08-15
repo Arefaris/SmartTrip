@@ -1,0 +1,46 @@
+/* Travel Type Selector Styles */
+.travel-type-selector .mantine-Input-input,
+.travel-type-selector .mantine-Select-input {
+    height: 85px !important;
+    min-height: 85px !important;
+    width: 200px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.travel-type-selector .mantine-Input-input:focus,
+.travel-type-selector .mantine-Select-input:focus {
+    border-color: #F58A50;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.travel-type-selector .mantine-Input-input::placeholder,
+.travel-type-selector .mantine-Select-input::placeholder {
+    color: #D5D7E0;
+    font-size: 16px;
+}
+
+.travel-type-selector .mantine-Input-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 16px !important;
+}
+
+.travel-type-selector .mantine-Select-dropdown {
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.travel-type-selector .mantine-Select-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+.travel-type-selector .mantine-Select-item:hover {
+    background: #f3f4f6;
+}

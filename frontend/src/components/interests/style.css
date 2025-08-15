@@ -1,0 +1,63 @@
+/* Interest Selector Styles */
+.interests-selector {
+    flex-grow: 1;
+}
+
+.interests-selector .mantine-Input-input,
+.interests-selector .mantine-MultiSelect-input {
+    width: 100% !important;
+    height: 85px !important;
+    min-height: 85px !important;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+
+.interests-selector .mantine-Input-input:focus,
+.interests-selector .mantine-MultiSelect-input:focus {
+    border-color: #F58A50;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.interests-selector .mantine-Input-input::placeholder,
+.interests-selector .mantine-MultiSelect-input::placeholder {
+    color: #D5D7E0;
+    font-size: 16px;
+}
+
+.interests-selector .mantine-Input-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 16px !important;
+}
+
+.interests-selector .mantine-MultiSelect-dropdown {
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.interests-selector .mantine-MultiSelect-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+.interests-selector .mantine-MultiSelect-item:hover {
+    background: #f3f4f6;
+}
+
+.interests-selector .mantine-MultiSelect-pill {
+    background: #F58A50;
+    color: white;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.interests-selector .mantine-MultiSelect-pillsList {
+    margin-top: 20px;
+    font-size: 16px;
+}

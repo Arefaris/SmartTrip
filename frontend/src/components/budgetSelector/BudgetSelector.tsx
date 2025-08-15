@@ -1,6 +1,7 @@
 import React from 'react'
 import { Select } from '@mantine/core';
 import useStore from '../../store/store';
+import './style.css';
 
 const budgetOptions = [
   "Economy / Good for travelers who want to save money or backpack." ,
@@ -24,7 +25,7 @@ export default function BudgetSelector() {
       placeholder="Select your budget for a trip"
       data={budgetOptions}
       onOptionSubmit={handleChange}
-      className="select budget"
+      className="budget-selector"
     />
   )
 }

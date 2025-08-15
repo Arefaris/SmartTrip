@@ -1,0 +1,46 @@
+/* Country Selector Styles */
+.country-selector .mantine-Input-input,
+.country-selector .mantine-Autocomplete-input {
+    height: 85px !important;
+    min-height: 85px !important;
+    width: 200px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.country-selector .mantine-Input-input:focus,
+.country-selector .mantine-Autocomplete-input:focus {
+    border-color: #F58A50;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.country-selector .mantine-Input-input::placeholder,
+.country-selector .mantine-Autocomplete-input::placeholder {
+    color: #D5D7E0;
+    font-size: 16px;
+}
+
+.country-selector .mantine-Input-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 16px !important;
+}
+
+.country-selector .mantine-Autocomplete-dropdown {
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.country-selector .mantine-Autocomplete-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+.country-selector .mantine-Autocomplete-item:hover {
+    background: #f3f4f6;
+}

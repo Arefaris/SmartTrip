@@ -1,6 +1,7 @@
 import React from 'react'
 import { Select } from '@mantine/core';
 import useStore from '../../store/store';
+import './style.css';
 
 export default function TravelTypeSelector() {
   const { plan, setPlan, travelerTypes } = useStore()
@@ -20,7 +21,7 @@ export default function TravelTypeSelector() {
       value={plan.traveler_type}
       onChange={handleChange}
       clearable
-      className="select"
+      className="travel-type-selector"
     />
   )
 }

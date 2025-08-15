@@ -3,12 +3,13 @@ import axios from 'axios';
 import type { city_country } from '../../types';
 import useStore from '../../store/store';
 import { Autocomplete } from '@mantine/core';
+import './style.css';
 
 
 const url = import.meta.env.VITE_BASE_URL
 
 export default function CountrySelector() {
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState<string[]>([]);
   const { plan, setPlan } = useStore()
 
   //fetching for auto-complete
@@ -23,8 +24,15 @@ export default function CountrySelector() {
       const result = await axios.post(`${url}/api/county-list`, { query })
 
       if (result.status === 200) {
-        const cityOptions = result.data.result.map((country: city_country) => `${country.name}, ${country.country_name}`)
-        setOptions(cityOptions)
+        //Transform API data into "City, Country" format strings
+        const cityOptions = result.data.result.map((country: city_country) => `${country.name}, ${country.country_name}`) as string[]
+        
+        //Remove duplicates using Set:
+        //1. new Set(cityOptions) creates a Set which only stores unique values
+        //2. [...new Set(cityOptions)] spreads the Set back into an array
+        //This eliminates duplicate entries like "Odessa, United States" appearing twice
+        const uniqueOptions = [...new Set(cityOptions)]
+        setOptions(uniqueOptions)
       }
 
     } catch (error) {
@@ -51,7 +59,7 @@ export default function CountrySelector() {
       selectFirstOptionOnChange
       onChange={fetchCityCountry}
       onOptionSubmit={handleChange}
-      className="select"
+      className="country-selector"
     />
   )
 }
