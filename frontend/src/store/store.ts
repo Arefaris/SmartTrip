@@ -1,32 +1,32 @@
 import { create } from 'zustand'
 
 type plan = {
-    location: string ,
-    days: number,
-    start_date: string,
-    end_date: string,
-    interests: string[],
-    budget: string,
-    traveler_type: string,
+  location: string,
+  days: number,
+  start_date: string,
+  end_date: string,
+  interests: string[],
+  budget: string,
+  traveler_type: string,
 }
 
 const interests = [
-  { value: "Adventure", label: "Adventure" },
-  { value: "Culture & History", label: "Culture & History" },
-  { value: "Food & Culinary", label: "Food & Culinary" },
-  { value: "Nature & Outdoors", label: "Nature & Outdoors" },
-  { value: "Relaxation & Wellness", label: "Relaxation & Wellness" },
-  { value: "Shopping", label: "Shopping" },
-  { value: "Nightlife", label: "Nightlife" },
-  { value: "Photography", label: "Photography" },
-  { value: "Art & Museums", label: "Art & Museums" },
-  { value: "Family-friendly", label: "Family-friendly" },
-  { value: "Romantic", label: "Romantic" },
-  { value: "Sports & Activities", label: "Sports & Activities" },
-  { value: "Beach & Water Sports", label: "Beach & Water Sports" },
-  { value: "Wildlife & Safari", label: "Wildlife & Safari" },
-  { value: "Local Experiences", label: "Local Experiences" },
-  { value: "Festivals & Events", label: "Festivals & Events" }
+  "Adventure",
+  "Culture & History",
+  "Food & Culinary",
+  "Nature & Outdoors",
+  "Relaxation & Wellness",
+  "Shopping",
+  "Nightlife",
+  "Photography",
+  "Art & Museums",
+  "Family-friendly",
+  "Romantic",
+  "Sports & Activities",
+  "Beach & Water Sports",
+  "Wildlife & Safari",
+  "Local Experiences",
+  "Festivals & Events"
 ]
 
 const travelerTypes = [
@@ -44,7 +44,7 @@ const travelerTypes = [
 
 interface StoreState {
   plan: plan,
-  interests: {value: string, label: string}[]
+  interests: string[]
   travelerTypes: string[],
   setPlan: (plan: plan) => void
 }

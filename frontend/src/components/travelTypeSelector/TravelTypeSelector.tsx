@@ -1,30 +1,25 @@
 import React from 'react'
-import Select from 'react-select';
+import { Select } from '@mantine/core';
 import useStore from '../../store/store';
 
 export default function TravelTypeSelector() {
   const { plan, setPlan, travelerTypes } = useStore()
 
-  const travelerTypeOptions = travelerTypes.map(type => ({
-    value: type,
-    label: type
-  }))
-
-  const handleChange = (selectedOption: {value: string, label: string} | null) => {
+  const handleChange = (value: string | null) => {
     setPlan({
       ...plan,
-      traveler_type: selectedOption?.value || ''
+      traveler_type: value || ''
     })
   }
 
   return (
-    <div className="select">
-        <Select
-        value={travelerTypeOptions.find(option => option.value === plan.traveler_type)}
-        onChange={handleChange}
-        options={travelerTypeOptions}
-        placeholder="Select traveler type..."
-        />
-    </div>
+    <Select
+      label="Who are you traveling with?"
+      placeholder="Choose your travel style"
+      data={travelerTypes}
+      value={plan.traveler_type}
+      onChange={handleChange}
+      clearable
+    />
   )
 }

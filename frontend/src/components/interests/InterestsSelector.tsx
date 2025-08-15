@@ -1,37 +1,28 @@
 import { useState } from "react";
 import useStore from '../../store/store';
-import React from 'react';
+import { MultiSelect } from '@mantine/core';
 import "./style.css"
-import Select, {type MultiValue } from 'react-select';
-
 
 export default function InterestSelector() {
-  const {plan, setPlan, interests } = useStore()
+  const { plan, setPlan, interests } = useStore()
   
-  const handleChange = (newValue: MultiValue<{value: string, label: string}>)=> {
+  const handleChange = (selectedValues: string[]) => {
     setPlan({
       ...plan,
-      interests: newValue?.map((interest) => interest.value) || []
+      interests: selectedValues
     })
   }
+
   return (
-    <div className="select">
-      <Select
-        value={interests.filter(interest => plan.interests.includes(interest.value))}
-        onChange={(value) => handleChange(value)}
-        isMulti
-        name="interests"
-        options={interests}
-        className="basic-multi-select"
-        styles={{
-    control: (baseStyles, state) => ({
-      ...baseStyles,
-      
-      borderColor: "black",
-      backgroundColor: "transparent"
-    }),
-  }}
-      />
-    </div>
+    <MultiSelect
+      label="What are your interests?"
+      placeholder="Select your travel interests"
+      data={interests}
+      value={plan.interests}
+      onChange={handleChange}
+      searchable
+      clearable
+      maxDropdownHeight={200}
+    />
   );
 }

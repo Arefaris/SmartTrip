@@ -17,15 +17,15 @@ export default function Home() {
   return (<div className="home">
           <h1>SmartTrip</h1>
           
-          <CountrySelector />
+         <CountrySelector /> 
           
           <DateSelector />
         
-          <InterestSelector />
+          <InterestSelector /> 
           
           <BudgetSelector />
           
-          <TravelTypeSelector />
+          <TravelTypeSelector /> 
 
 
           <button onClick={() => {run()}}>Plan trip</button>
