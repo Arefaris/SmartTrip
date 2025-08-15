@@ -1,8 +1,173 @@
+/* Main container styling */
 .home {
+    width: 100vw;
+    margin: 0;
+    padding: 40px 20px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
-    min-width: 500px;
+    background: linear-gradient(135deg, #0c0c0c 0%, #2d1b69 100%);
+
+}
+
+.flex {
+  display: flex;
+  width: 800px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px;
+  border-radius: 15px;
+  gap: 15px;
+}
+
+.country-date-travel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.budget-travel-cont {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+/* Input field styling */
+.select .mantine-Input-wrapper {
+    margin-bottom: 0;
+}
+
+.select .mantine-Input-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+ 
+}
+
+.select .mantine-Input-input,
+.select .mantine-DatePickerInput-input,
+.select .mantine-Autocomplete-input,
+.select .mantine-Select-input,
+.select .mantine-MultiSelect-input {
+    height: 85px !important;
+    min-height: 85px !important;
+    width: 200px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
     
 }
 
+.interests {
+  
+  flex-grow: 1;
+}
+.interests .mantine-MultiSelect-input {
+  width: 100% !important;
+}
+
+.budget .mantine-Select-input {
+  width: 300px;
+}
+.select .mantine-Input-input:focus,
+.select .mantine-DatePickerInput-input:focus,
+.select .mantine-Autocomplete-input:focus,
+.select .mantine-Select-input:focus,
+.select .mantine-MultiSelect-input:focus {
+    border-color: #F58A50;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+   
+}
+
+.select .mantine-Input-input::placeholder,
+.select .mantine-DatePickerInput-input::placeholder,
+.select .mantine-Autocomplete-input::placeholder,
+.select .mantine-Select-input::placeholder,
+.select .mantine-MultiSelect-input::placeholder {
+    color: #D5D7E0;
+    font-size: 16px;
+    
+}
+
+/* Search button */
+.search-button {
+    width: 100%;
+    height: 56px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* Dropdown styling */
+.select .mantine-Select-dropdown,
+.select .mantine-MultiSelect-dropdown,
+.select .mantine-Autocomplete-dropdown {
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    
+}
+
+.select .mantine-Select-item,
+.select .mantine-MultiSelect-item,
+.select .mantine-Autocomplete-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 4px;
+    
+}
+
+.select .mantine-Select-item:hover,
+.select .mantine-MultiSelect-item:hover,
+.select .mantine-Autocomplete-item:hover {
+    background: #f3f4f6;
+}
+
+/* Multi-select pill styling */
+.select .mantine-MultiSelect-pill {
+    background: #F58A50;
+    color: white;
+    border-radius: 20px;
+    font-size: 16px;
+
+}
+
+.mantine-InputWrapper-label {
+  font-size: 16px !important;
+  margin-bottom: 10px;
+}
+
+
+.plan-btn {
+
+  width: 200px;
+  height: 85px;
+  font-size: 24px;
+  background-color: #F58A50;
+  border-radius: 12px;
+  align-self: flex-end;
+  
+}
+
+.plan-btn:hover {
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+.mantine-MultiSelect-pillsList {
+  margin-top: 15px;
+  font-size: 16px;
+}

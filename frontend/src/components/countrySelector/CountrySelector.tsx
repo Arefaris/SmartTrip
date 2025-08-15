@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { city_country } from '../../types';
 import useStore from '../../store/store';
 import { Autocomplete } from '@mantine/core';
-import './style.css';
+
 
 const url = import.meta.env.VITE_BASE_URL
 
@@ -46,11 +46,12 @@ export default function CountrySelector() {
   return (
     <Autocomplete
       label="Where to?"
-      placeholder="Pick value or enter anything"
+      placeholder="Enter country or city"
       data={options}
       selectFirstOptionOnChange
       onChange={fetchCityCountry}
       onOptionSubmit={handleChange}
+      className="select"
     />
   )
 }

@@ -39,6 +39,7 @@ export default function DateSelector() {
       placeholder="Select your departure and return dates"
       value={value}
       onChange={updatePlan}
+      className="select"
     />
   );
 

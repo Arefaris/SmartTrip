@@ -24,6 +24,7 @@ export default function BudgetSelector() {
       placeholder="Select your budget for a trip"
       data={budgetOptions}
       onOptionSubmit={handleChange}
+      className="select budget"
     />
   )
 }

@@ -20,6 +20,7 @@ export default function TravelTypeSelector() {
       value={plan.traveler_type}
       onChange={handleChange}
       clearable
+      className="select"
     />
   )
 }

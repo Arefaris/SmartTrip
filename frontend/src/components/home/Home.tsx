@@ -14,21 +14,31 @@ export default function Home() {
   const run = ()=> {
     console.log(plan)
   }
-  return (<div className="home">
+  return (
+  
+  <div className="home">
+
+        <div className="flex">
           <h1>SmartTrip</h1>
+
+            <div className="country-date-travel">
+              <CountrySelector /> 
+              
+              <DateSelector />
+
+              <TravelTypeSelector /> 
+              <button className="plan-btn" onClick={() => {run()}}>Plan trip</button>
+            </div>
+            
+              <div className="budget-travel-cont">
+                <BudgetSelector />
+                <InterestSelector /> 
+              </div>
           
-         <CountrySelector /> 
-          
-          <DateSelector />
+          </div>  
         
-          <InterestSelector /> 
           
-          <BudgetSelector />
           
-          <TravelTypeSelector /> 
-
-
-          <button onClick={() => {run()}}>Plan trip</button>
         </div>
     
   )
