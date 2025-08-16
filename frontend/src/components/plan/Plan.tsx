@@ -26,7 +26,6 @@ interface PlanData {
 
 export default function Plan() {
   const { plan } = useStore()
-  const navigate = useNavigate()
   const [apiPlanData, setApiPlanData] = React.useState<PlanData | null>(null)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<string | null>(null)

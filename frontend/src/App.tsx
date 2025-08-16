@@ -29,7 +29,7 @@ function App() {
             
             <div className="log-register cont">
                 <button>Register</button>
-                <button>Login</button>
+                <button onClick={() => navigate("/login")}>Login</button>
             </div>
         
         </div>

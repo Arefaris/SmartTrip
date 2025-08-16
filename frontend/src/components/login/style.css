@@ -1,0 +1,114 @@
+.login-page {
+    width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.submit-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.container-form {
+    display: flex;
+    width: 100%;
+    max-width: 450px;
+    flex-direction: column;
+    padding: 40px;
+    border-radius: 20px;
+    gap: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+}
+
+.form-subtitle {
+    font-size: 16px;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+.form-input .mantine-Input-input {
+    height: 60px !important;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    padding: 0 16px;
+}
+
+.form-input .mantine-Input-input:focus {
+     border-color: #F58A50;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.login-button {
+    height: 60px;
+    background: #d36225;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background: #d36225;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+
+.login-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #dc2626;
+    background: #fef2f2;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #fecaca;
+}
+
+.success-message {
+    color: #059669;
+    background: #f0fdf4;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #bbf7d0;
+}
+
+.register-link {
+    text-align: center;
+    color: #b3b9c5;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.register-link-text {
+    color: #d36225;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.register-link-text:hover {
+    color: #d36225;
+}
