@@ -72,9 +72,6 @@ export default function Plan() {
   if (loading) {
     return (
       <div className="plan-container">
-        <button className="back-button" onClick={() => navigate('/')}>
-          ← Back to Planning
-        </button>
         <div className="plan-header">
           <h1 className="plan-title">Creating Your Travel Plan...</h1>
           <p className="plan-subtitle">Please wait while we generate your personalized itinerary</p>
@@ -87,9 +84,6 @@ export default function Plan() {
   if (error) {
     return (
       <div className="plan-container">
-        <button className="back-button" onClick={() => navigate('/')}>
-          ← Back to Planning
-        </button>
         <div className="plan-header">
           <h1 className="plan-title">Error Loading Plan</h1>
           <p className="plan-subtitle">{error}</p>
@@ -109,9 +103,6 @@ export default function Plan() {
   if (!apiPlanData) {
     return (
       <div className="plan-container">
-        <button className="back-button" onClick={() => navigate('/')}>
-          ← Back to Planning
-        </button>
         <div className="plan-header">
           <h1 className="plan-title">No Plan Data</h1>
           <p className="plan-subtitle">Unable to load travel plan</p>
@@ -124,10 +115,6 @@ export default function Plan() {
 
   return (
     <div className="plan-container">
-      <button className="back-button" onClick={() => navigate('/')}>
-        ← Back to Planning
-      </button>
-      
       <div className="plan-header">
         <h1 className="plan-title">Your Travel Plan</h1>
         <p className="plan-subtitle">{displayData.location}</p>

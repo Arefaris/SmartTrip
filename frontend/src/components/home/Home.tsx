@@ -6,13 +6,13 @@ import InterestSelector from '../interests/InterestsSelector';
 import BudgetSelector from '../budgetSelector/BudgetSelector';
 import TravelTypeSelector from '../travelTypeSelector/TravelTypeSelector';
 import "./style.css"
+
 export default function Home() {
   const navigate = useNavigate()
   const { plan } = useStore()
 
   //validation to check if user provided everything
   const isFormValid = () => {
-    console.log(plan)
     return (
       plan.location && 
       plan.start_date && 
@@ -34,13 +34,13 @@ export default function Home() {
   return (
 
     <div className="home">
-      <h1 className="app-logo">SmartTrip</h1>
+      
       <div className="flex">
         <h2 className="hero-title">Create AI-powered travel plans</h2>
         <div className="country-date-travel">
           <CountrySelector />
           <DateSelector />
-          <TravelTypeSelector />
+          
           <button 
             className={`plan-btn ${!isFormValid() ? 'disabled' : ''}`}
             onClick={() => { run() }}
@@ -51,8 +51,9 @@ export default function Home() {
         </div>
         <div className="budget-travel-cont">
           <BudgetSelector />
-          <InterestSelector />
+          <TravelTypeSelector />
         </div>
+        <InterestSelector />
       </div>
     </div>
 

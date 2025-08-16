@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useCallback } from 'react'
 import axios from 'axios';
 import type { city_country } from '../../types';
 import useStore from '../../store/store';
@@ -9,13 +9,14 @@ import './style.css';
 const url = import.meta.env.VITE_BASE_URL
 
 export default function CountrySelector() {
-  const [options, setOptions] = useState<string[]>([]);
   const { plan, setPlan } = useStore()
+  const [options, setOptions] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState(plan.location);
+ 
 
   //fetching for auto-complete
-  const fetchCityCountry = async (query: string) => {
+  const fetchCityCountry = useCallback(async (query: string) => {
     if (query.length < 3) {
-      console.log(query)
       setOptions([]);
       return;
     }
@@ -27,44 +28,48 @@ export default function CountrySelector() {
         //Transform API data into "City, Country" format strings
         const cityOptions = result.data.result.map((country: city_country) => `${country.name}, ${country.country_name}`) as string[]
         
-        //Remove duplicates using Set:
-        //1. new Set(cityOptions) creates a Set which only stores unique values
-        //2. [...new Set(cityOptions)] spreads the Set back into an array
-        //This eliminates duplicate entries like "Odessa, United States" appearing twice
-        const uniqueOptions = [...new Set(cityOptions)]
+        //Extract unique countries from the results
+        const countries = result.data.result.map((country: city_country) => country.country_name) as string[]
+        const uniqueCountries = [...new Set(countries)]
+        
+        //Combine city options with country-only options
+        const allOptions = [...uniqueCountries, ...cityOptions]
+        
+        //Remove duplicates using Set
+        const uniqueOptions = [...new Set(allOptions)]
         setOptions(uniqueOptions)
-
-        setPlan({
-        ...plan,
-        location: query
-      })
-      
       }
 
     } catch (error) {
       console.log(error)
     }
-  }
+  }, [])
 
   //setting location
-  const handleChange = (value: string) => {
+  const handleChange = useCallback((value: string) => {
+    setInputValue(value);
+    fetchCityCountry(value);
+  }, [fetchCityCountry])
 
+  const handleOptionSubmit = useCallback((value: string) => {
     if (value) {
       setPlan({
         ...plan,
         location: value
       })
+      setInputValue(value);
     }
-  }
+  }, [plan, setPlan])
 
   return (
     <Autocomplete
       label="Where to?"
       placeholder="Enter country or city"
       data={options}
+      value={inputValue}
       selectFirstOptionOnChange
-      onChange={fetchCityCountry}
-      onOptionSubmit={handleChange}
+      onChange={handleChange}
+      onOptionSubmit={handleOptionSubmit}
       className="country-selector"
     />
   )

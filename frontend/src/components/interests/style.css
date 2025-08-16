@@ -1,7 +1,5 @@
 /* Interest Selector Styles */
-.interests-selector {
-    flex-grow: 1;
-}
+ 
 
 .interests-selector .mantine-Input-input,
 .interests-selector .mantine-MultiSelect-input {
@@ -38,6 +36,7 @@
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
     overflow: hidden;
+    
 }
 
 .interests-selector .mantine-MultiSelect-item {
@@ -50,14 +49,24 @@
     background: #f3f4f6;
 }
 
+.mantine-Pill-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+}
+
 .interests-selector .mantine-MultiSelect-pill {
     background: #F58A50;
     color: white;
     border-radius: 20px;
+    height: 35px;
     font-size: 16px;
+    
 }
 
 .interests-selector .mantine-MultiSelect-pillsList {
     margin-top: 20px;
     font-size: 16px;
+    
 }

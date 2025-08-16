@@ -8,7 +8,8 @@ import type { DatesRangeValue } from '@mantine/dates';
 export default function DateSelector() {
   const { plan, setPlan } = useStore();
 
-  const [value, setValue] = useState<DatesRangeValue>([null, null]);
+  const [value, setValue] = useState<DatesRangeValue>
+  ( [plan.start_date ? plan.start_date : null, plan.end_date ? plan.end_date: null]);
 
   const updatePlan = (dateRange: DatesRangeValue) => {
     

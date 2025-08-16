@@ -12,11 +12,7 @@
     background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
 }
 
-.app-logo {
-    position: absolute;
-    top: 0;
-    left: 30px;
-}
+
 
 .hero-title {
     font-size: 44px;
@@ -48,12 +44,7 @@
 
 .budget-travel-cont {
     display: flex;
-    justify-content: space-between;
     gap: 5px;
-}
-
-.budget-travel-cont .interests-selector {
-    flex-grow: 1;
 }
 
 .plan-btn {

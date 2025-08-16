@@ -2,6 +2,7 @@ import React from 'react'
 import { Select } from '@mantine/core';
 import useStore from '../../store/store';
 import './style.css';
+import { pl } from 'date-fns/locale';
 
 const budgetOptions = [
   "Economy / Good for travelers who want to save money or backpack." ,
@@ -21,6 +22,7 @@ export default function BudgetSelector() {
 
   return (
     <Select
+      value={plan.budget}
       label="Budget"
       placeholder="Select your budget for a trip"
       data={budgetOptions}

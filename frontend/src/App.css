@@ -6,3 +6,82 @@
   min-height: 100vh;
 }
 
+body {
+  margin: 0;
+  padding-top: 80px;
+}
+
+.header {
+  display: flex;
+  width: 100vw;
+  height: 80px;
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header .app-logo {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.app-logo:hover {
+  cursor: pointer;
+}
+
+.logo-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.log-register {
+  display: flex;
+  gap: 15px;
+}
+
+.log-register button {
+  padding: 12px 24px;
+  border: 2px solid white;
+  border-radius: 25px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.log-register button:hover, .back-button:hover {
+  background: white;
+  color: #4b6cb7;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.log-register button:active {
+  transform: translateY(0);
+}
+
+.back-button {
+
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+

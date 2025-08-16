@@ -1,7 +1,12 @@
 /* Country Selector Styles */
+.country-selector {
+    flex-grow: 1;
+}
+
 .country-selector .mantine-Input-input,
 .country-selector .mantine-Autocomplete-input {
     height: 85px !important;
+    width: 100% !important;
     min-height: 85px !important;
     width: 200px;
     border: 2px solid #e5e7eb;

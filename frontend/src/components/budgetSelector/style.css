@@ -1,9 +1,13 @@
 /* Budget Selector Styles */
+.budget-selector {
+    flex: 1;
+}
+
 .budget-selector .mantine-Input-input,
 .budget-selector .mantine-Select-input {
+    width: 100% !important;
     height: 85px !important;
     min-height: 85px !important;
-    width: 300px;
     border: 2px solid #e5e7eb;
     border-radius: 12px;
     font-size: 16px;
@@ -12,6 +16,7 @@
 .budget-selector .mantine-Input-input:focus,
 .budget-selector .mantine-Select-input:focus {
     border-color: #F58A50;
+    
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 

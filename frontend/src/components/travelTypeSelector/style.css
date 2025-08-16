@@ -1,9 +1,13 @@
 /* Travel Type Selector Styles */
+.travel-type-selector {
+    flex: 1;
+}
+
 .travel-type-selector .mantine-Input-input,
 .travel-type-selector .mantine-Select-input {
+    width: 100% !important;
     height: 85px !important;
     min-height: 85px !important;
-    width: 200px;
     border: 2px solid #e5e7eb;
     border-radius: 12px;
     font-size: 16px;
