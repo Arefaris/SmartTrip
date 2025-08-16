@@ -14,25 +14,25 @@ import { gptResponse } from "./gptModel";
 
 //model to submit user plan to db
 export const createPlan = async (plan: Plan, userid: string) => {
-    const response =  await gptResponse(plan)
-   
+    // hashing up our plan for future look up
+    const hash = crypto
+        .createHash("sha256")
+        .update(JSON.stringify(plan))
+        .digest("hex");
+        
+    // First check if plan already exists
+    const existingPlan = await lookUpPlan(hash)
+    if (existingPlan) {
+        return existingPlan
+    }
+    
+    // Plan doesn't exist, so generate and create it
+    const response = await gptResponse(plan)
+    
     const trx = await db.transaction()
+
     try {
-
-        // in the future we will lookup our plan by hash, for speed up
-        const hash = crypto
-            .createHash("sha256")
-            .update(JSON.stringify(plan))
-            .digest("hex");
-
-        // if planned was found, return it
-        const result = await lookUpPlan(hash)
-
-        if (result) {
-            return result
-        }
-        // if not, create it
-
+        // Try to insert the new plan
         const [returnPlan] = await trx("plan").insert({
             location: plan.location.toLowerCase(),
             days: plan.days,
@@ -56,9 +56,19 @@ export const createPlan = async (plan: Plan, userid: string) => {
         await trx.commit()
 
         return returnPlan["generated_plan"]
-    } catch (error) {
+    } catch (error: any) {
+        
         await trx.rollback()
         console.log(error)
+        
+        if (error.code === '23505') {
+            const existingPlan = await lookUpPlan(hash)
+            if (existingPlan) {
+                return existingPlan
+            }
+        }
+        
+        throw error
     }
 }
 
@@ -66,6 +76,24 @@ export const createPlan = async (plan: Plan, userid: string) => {
 const lookUpPlan = async (hash: string) => {
     try {
         const result = await db("plan")
+            .select("generated_plan")
+            .where({ hash })
+            .first()
+
+        if (result) {
+            return result["generated_plan"]
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+//searching by hash in our db using transaction
+const lookUpPlanWithTransaction = async (hash: string, trx: any) => {
+    try {
+        const result = await trx("plan")
             .select("generated_plan")
             .where({ hash })
             .first()
