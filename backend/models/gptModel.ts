@@ -6,6 +6,14 @@ import { Plan } from "../types";
 export const gptResponse = async (plan: Plan) => {
   
   try {
+    //making sure that we are capped at 30 days
+    if (plan.days > 30) {
+      plan.days = 30
+    }
+
+    //dynamicly calculating tokens for a response
+    const maxTokens = calculateOutputTokens(plan.days);
+    
     const response = await openai.responses.create({
       model: "gpt-5-nano-2025-08-07",
       reasoning: {
@@ -41,12 +49,12 @@ export const gptResponse = async (plan: Plan) => {
       ],
       text: {
         "format": {
-          "type": "text"
+          "type": "json_object"
         }
       },
       tools: [],
     //   temperature: 0.0,
-      max_output_tokens: 2048,
+      max_output_tokens: maxTokens,
       top_p: 1,
       store: false
     });
@@ -59,3 +67,12 @@ export const gptResponse = async (plan: Plan) => {
 
   }
 }
+
+//scale tokens
+  const calculateOutputTokens = (days: number): number => {
+    const baseTokens = 1000; // Base JSON structure
+    const tokensPerDay = 400; // Estimated tokens per day of activities
+    const calculated = baseTokens + (days * tokensPerDay);
+
+    return Math.min(calculated, 13000); // Cap at max for 30 days
+  };
