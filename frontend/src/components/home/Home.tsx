@@ -8,10 +8,11 @@ import TravelTypeSelector from '../travelTypeSelector/TravelTypeSelector';
 import "./style.css"
 export default function Home() {
   const navigate = useNavigate()
-  const { plan} = useStore()
+  const { plan } = useStore()
 
   //validation to check if user provided everything
   const isFormValid = () => {
+    console.log(plan)
     return (
       plan.location && 
       plan.start_date && 
@@ -26,6 +27,7 @@ export default function Home() {
   const run = () => {
     if (isFormValid()) {
       navigate("/plan")
+      
     }
   }
 

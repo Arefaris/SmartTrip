@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 type plan = {
   location: string,
@@ -49,19 +50,29 @@ interface StoreState {
   setPlan: (plan: plan) => void
 }
 
-const useStore = create<StoreState>((set) => ({
-  plan: {
-    location: '',
-    days: 0,
-    start_date: '',
-    end_date: '',
-    interests: [],
-    budget: '',
-    traveler_type: ''
-  },
-  interests: interests,
-  travelerTypes: travelerTypes,
-  setPlan: (plan: plan) => set({ plan }),
-}))
+const useStore = create<StoreState>()(
+  // automatically saves state to localStorage and restores it on page reload
+  persist(
+    (set) => ({
+      plan: {
+        location: '',
+        days: 0,
+        start_date: '',
+        end_date: '',
+        interests: [],
+        budget: '',
+        traveler_type: ''
+      },
+      interests: interests,
+      travelerTypes: travelerTypes,
+      setPlan: (plan: plan) => set({ plan }),
+    }),
+    {
+      name: 'travel-plan-storage', // key name in localStorage
+      storage: createJSONStorage(() => localStorage), // use localStorage as storage
+      partialize: (state) => ({ plan: state.plan }), // only persist the plan object, not interests/travelerTypes
+    }
+  )
+)
 
 export default useStore

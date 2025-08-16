@@ -33,6 +33,12 @@ export default function CountrySelector() {
         //This eliminates duplicate entries like "Odessa, United States" appearing twice
         const uniqueOptions = [...new Set(cityOptions)]
         setOptions(uniqueOptions)
+
+        setPlan({
+        ...plan,
+        location: query
+      })
+      
       }
 
     } catch (error) {
