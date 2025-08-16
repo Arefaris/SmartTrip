@@ -1,4 +1,4 @@
-.login-page {
+.register-page {
     width: 100vw;
     min-height: 100vh;
     background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
@@ -54,7 +54,7 @@
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.login-button {
+.register-button {
     height: 60px;
     background-color: #d36225 !important;
     border: none;
@@ -65,13 +65,12 @@
     padding: 0 24px;
 }
 
-.login-button:hover {
+.register-button:hover {
     background-color: #d36225 !important;
     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
 }
 
-
-.login-button:disabled {
+.register-button:disabled {
     opacity: 0.7;
     cursor: not-allowed;
 }
@@ -96,20 +95,20 @@
     border: 1px solid #bbf7d0;
 }
 
-.register-link {
+.login-link {
     text-align: center;
     color: #b3b9c5;
     font-size: 14px;
     margin-top: 10px;
 }
 
-.register-link-text {
+.login-link-text {
     color: #d36225;
     cursor: pointer;
     font-weight: 600;
     text-decoration: underline;
 }
 
-.register-link-text:hover {
+.login-link-text:hover {
     color: #d36225;
 }

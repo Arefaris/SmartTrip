@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Route, Routes, Link, useNavigate, Navigate, useLocation } from 'react-router'
+import useStore from './store/store'
 import Register from './components/register/Register'
 import Home from './components/home/Home'
 import './App.css'
@@ -9,9 +10,15 @@ import Plan from './components/plan/Plan'
 function App() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { isAuthenticated, refreshToken, logout, user } = useStore()
   
   // Show back button only on non-home pages
   const showBackButton = location.pathname !== '/'
+  
+  // Check authentication on app load
+  useEffect(() => {
+    refreshToken()
+  }, [])
   
   return (
       <div>
@@ -28,8 +35,16 @@ function App() {
 
             
             <div className="log-register cont">
-                <button>Register</button>
-                <button onClick={() => navigate("/login")}>Login</button>
+                {isAuthenticated ? (
+                  <>
+                    <button onClick={logout}>Logout</button>
+                  </>
+                ) : (
+                  <>
+                    <button onClick={() => navigate("/register")}>Register</button>
+                    <button onClick={() => navigate("/login")}>Login</button>
+                  </>
+                )}
             </div>
         
         </div>

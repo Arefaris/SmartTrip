@@ -1,5 +1,8 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
+import axios from 'axios'
+const url = import.meta.env.VITE_BASE_URL
+
 
 type plan = {
   location: string,
@@ -47,13 +50,20 @@ interface StoreState {
   plan: plan,
   interests: string[]
   travelerTypes: string[],
-  setPlan: (plan: plan) => void
+  user: any,
+  token: string | null,
+  isAuthenticated: boolean,
+  setPlan: (plan: plan) => void,
+  login: (user: any, token: string) => void,
+  logout: () => Promise<void>,
+  refreshToken: () => Promise<void>
 }
+
 
 const useStore = create<StoreState>()(
   // automatically saves state to localStorage and restores it on page reload
   persist(
-    (set) => ({
+    (set, get) => ({
       plan: {
         location: '',
         days: 0,
@@ -65,12 +75,50 @@ const useStore = create<StoreState>()(
       },
       interests: interests,
       travelerTypes: travelerTypes,
+      user: null,
+      token: null,
+      isAuthenticated: false,
       setPlan: (plan: plan) => set({ plan }),
+      login: (user: any, token: string) => set({ 
+        user, 
+        token, 
+        isAuthenticated: true 
+      }),
+      logout: async () => {
+        try {
+          // Call backend to clear HTTP-only cookies
+          await axios.post(`${url}/api/logout`, {}, {
+            withCredentials: true
+          })
+        } catch (error) {
+          console.log('Logout error:', error)
+        } finally {
+          // Always clear local state regardless of backend response
+          set({ 
+            user: null, 
+            token: null, 
+            isAuthenticated: false 
+          })
+        }
+      },
+      refreshToken: async () => {
+        try {
+          const response = await axios.get(`${url}/api/verify-auth`, {
+            withCredentials: true
+          })
+          
+          const {user, token} = response.data
+          get().login(user, token)
+        } catch (error) {
+          console.log(error)
+          get().logout()
+        }
+      },
     }),
     {
       name: 'travel-plan-storage', // key name in localStorage
       storage: createJSONStorage(() => localStorage), // use localStorage as storage
-      partialize: (state) => ({ plan: state.plan }), // only persist the plan object, not interests/travelerTypes
+      partialize: (state) => ({ plan: state.plan }), // only persist the plan object
     }
   )
 )

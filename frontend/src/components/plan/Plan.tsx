@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import useStore from '../../store/store';
 import axios from 'axios';
 import './style.css';
+import { Loader } from '@mantine/core';
 
 interface Activity {
   time: string;
@@ -74,6 +75,7 @@ export default function Plan() {
         <div className="plan-header">
           <h1 className="plan-title">Creating Your Travel Plan...</h1>
           <p className="plan-subtitle">Please wait while we generate your personalized itinerary</p>
+          <Loader size="lg" color="white" /> 
         </div>
       </div>
     )

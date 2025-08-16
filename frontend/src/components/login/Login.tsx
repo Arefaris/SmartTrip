@@ -1,12 +1,14 @@
 import React, { useRef, useState, type FormEvent } from 'react'
 import { Input, Button, Loader } from '@mantine/core';
 import { useNavigate } from 'react-router'
+import useStore from '../../store/store'
 import axios from 'axios'
 import "./style.css"
 const url = import.meta.env.VITE_BASE_URL
 
 export default function Login() {
     const navigate = useNavigate()
+    const { login } = useStore()
     const emailRef = useRef<HTMLInputElement>(null)
     const passRef = useRef<HTMLInputElement>(null)
     const [successLogin, setSuccessLogin] = useState<string>("")
@@ -28,6 +30,8 @@ export default function Login() {
             })
 
             if(response.status === 200){
+                const { user, token } = response.data
+                login(user, token)
                 setSuccessLogin("Login successful, redirecting...")
                 setTimeout(() => {
                     navigate("/")
