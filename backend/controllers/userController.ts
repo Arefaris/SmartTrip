@@ -153,7 +153,7 @@ export const verifyAuth = (req: Request, res: Response) => {
         })
 
         res.cookie("token", newToken, {
-            maxAge: 15 * 60 * 1000, //15 minutes in milliseconds
+            maxAge: 60 * 60 * 1000, //60 minutes in milliseconds
             httpOnly: true
         })
 

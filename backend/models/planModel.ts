@@ -54,10 +54,10 @@ export const createPlan = async (plan: Plan, userid: string) => {
 
         console.log(user_plans)
         await trx.commit()
-
         return returnPlan["generated_plan"]
-    } catch (error: any) {
         
+    } catch (error: any) {
+
         await trx.rollback()
         console.log(error)
         
@@ -90,23 +90,6 @@ const lookUpPlan = async (hash: string) => {
 
 }
 
-//searching by hash in our db using transaction
-const lookUpPlanWithTransaction = async (hash: string, trx: any) => {
-    try {
-        const result = await trx("plan")
-            .select("generated_plan")
-            .where({ hash })
-            .first()
-
-        if (result) {
-            return result["generated_plan"]
-        }
-
-    } catch (error) {
-        console.log(error)
-    }
-
-}
 
 export const getUserPlans = async (userid: string) => {
     try {
