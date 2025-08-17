@@ -7,8 +7,15 @@ export type city_country = {
 export interface Activity {
   time: string;
   title: string;
+  photo: Photo;
   description: string;
   notes?: string;
+}
+
+export interface Photo {
+  url: string,
+  photographer: string,
+  photographer_url: string
 }
 
 export interface DayPlan {

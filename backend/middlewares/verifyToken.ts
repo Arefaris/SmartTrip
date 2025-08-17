@@ -22,3 +22,32 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
           next();
       });
   };
+
+// Optional authentication - extracts user if logged in, but doesn't block unauthenticated users
+export const optionalAuth = (req: Request, res: Response, next: NextFunction) => {
+    const token = req.cookies?.token;
+    
+    if (!token) {
+        // No token, but that's okay - continue without user
+        req.user = undefined;
+        return next();
+    }
+
+    const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+    if (!ACCESS_TOKEN_SECRET) {
+        // Server config error, but don't block the request
+        req.user = undefined;
+        return next();
+    }
+
+    jwt.verify(token, ACCESS_TOKEN_SECRET, (err: any, decoded: any) => {
+        if (err) {
+            // Invalid token, but don't block - just continue without user
+            req.user = undefined;
+        } else {
+            // Valid token - set the user
+            req.user = decoded;
+        }
+        next();
+    });
+};

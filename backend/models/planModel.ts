@@ -13,7 +13,7 @@ import { gptResponse } from "./gptModel";
 // }
 
 //model to submit user plan to db
-export const createPlan = async (plan: Plan, userid: string) => {
+export const createPlan = async (plan: Plan, userid: string | null) => {
     // hashing up our plan for future look up
     const hash = crypto
         .createHash("sha256")
@@ -27,12 +27,29 @@ export const createPlan = async (plan: Plan, userid: string) => {
     }
     
     // Plan doesn't exist, so generate and create it
-    const response = await gptResponse(plan)
+    const response = await gptResponse(plan);
     
     const trx = await db.transaction()
-
+    
     try {
         // Try to insert the new plan
+        let planContent = response.choices[0]?.message?.content || JSON.stringify({ error: "Failed to generate plan" });
+        
+        // Sanitize content to remove null characters and other problematic Unicode sequences
+        planContent = planContent
+            .replace(/\u0000/g, '') // Remove null characters
+            .replace(/[\u0001-\u001F\u007F-\u009F]/g, '') // Remove control characters
+            .trim();
+        
+        // Log content details for debugging
+        console.log("📄 Generated content details:", {
+          length: planContent?.length || 0,
+          firstChars: planContent?.substring(0, 100) + "...",
+          lastChars: "..." + planContent?.substring(planContent.length - 100),
+          startsWithBrace: planContent?.startsWith("{"),
+          endsWithBrace: planContent?.endsWith("}"),
+        });
+        
         const [returnPlan] = await trx("plan").insert({
             location: plan.location.toLowerCase(),
             days: plan.days,
@@ -42,9 +59,11 @@ export const createPlan = async (plan: Plan, userid: string) => {
             budget: plan.budget.toLowerCase(),
             traveler_type: plan.traveler_type.toLowerCase(),
             hash: hash,
-            generated_plan: response.output_text
+            generated_plan: planContent
         }, ["generated_plan", "id"])
-
+        console.log(userid)
+        // if user id was provided (user logged in)
+        if (userid){
         //saving this plan to user, for future lookup
         const [user_plans] = await trx("user_plans")
             .insert({
@@ -52,8 +71,11 @@ export const createPlan = async (plan: Plan, userid: string) => {
                 plan_id: returnPlan["id"]
             }, ["user_id", "plan_id"])
 
-        console.log(user_plans)
+            console.log(user_plans)
+        }
+     
         await trx.commit()
+        console.log("Plan saved to database successfully");
         return returnPlan["generated_plan"]
         
     } catch (error: any) {

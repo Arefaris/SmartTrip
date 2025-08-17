@@ -1,5 +1,6 @@
 import React from 'react'
 import type { PlanData, Activity, DayPlan } from '../../types';
+import { BackgroundImage } from '@mantine/core';
 
 
 export default function PlanDisplay({displayData} : {displayData: PlanData}) {
@@ -37,15 +38,33 @@ export default function PlanDisplay({displayData} : {displayData: PlanData}) {
                 <div className="activities-list">
                   {dayPlan.activities.map((activity: Activity, index: number) => (
                     <div key={index} className="activity-item">
+                      
                       <div className="activity-time">{activity.time}</div>
                       <div className="activity-content">
                         <h3 className="activity-title">{activity.title}</h3>
                         <p className="activity-description">{activity.description}</p>
-                        {activity.notes && (
-                          <div className="activity-notes">
-                            💡 {activity.notes}
+                        {activity.photo.url && (
+                        <div>
+                          <img 
+                            src={activity.photo.url} 
+                            alt={activity.title}
+                            className="activity-image"
+                          />
+                          <div className="photo-credits">
+                            <div className="photographer-name">
+                              Photo by {activity.photo.photographer}
+                            </div>
+                            <a 
+                              href={activity.photo.photographer_url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="photographer-link"
+                            >
+                              View photographer's profile
+                            </a>
                           </div>
-                        )}
+                        </div>
+                      )}
                       </div>
                     </div>
                   ))}

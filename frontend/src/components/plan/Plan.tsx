@@ -15,8 +15,11 @@ export default function Plan() {
   const [error, setError] = React.useState<string | null>(null)
   
   const url = import.meta.env.VITE_BASE_URL
-  
+
+
   useEffect(() => {
+    
+
     const fetchPlan = async () => {
       try {
         setLoading(true)

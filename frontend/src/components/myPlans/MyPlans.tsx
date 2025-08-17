@@ -4,6 +4,7 @@ import "./style.css"
 import { Loader } from '@mantine/core'
 import type { PlanData, AllUserPlans } from '../../types'
 import PlanDisplay from '../plan/PlanDisplay'
+import useStore from '../../store/store'
 
 const url = import.meta.env.VITE_BASE_URL
 export default function MyPlans() {
@@ -11,7 +12,10 @@ export default function MyPlans() {
     const [error, setError] = useState<string>("")
     const [allUserPlans, setAllUserPlans] = useState<AllUserPlans[]>([])
     const [displayIndex, setDisplayIndex] = useState(0)
+    const {refreshToken } = useStore()
+
   useEffect(()=>{
+    refreshToken()
     const fetchAllPlans = async ()=> {
         try {
             setLoading(true)
@@ -21,7 +25,7 @@ export default function MyPlans() {
             
             if (response.data && response.data.userPlans) {
                     setAllUserPlans(response.data.userPlans)
-                    console.log(response.data.userPlans[0])
+                    console.log(response.data)
                     setLoading(false)
             }   
 
@@ -52,7 +56,10 @@ export default function MyPlans() {
         </div>
       )
     }
-  
+
+  if (allUserPlans.length < 1){
+    return <h1>You have no generated plans. Go create one!</h1>
+  }
 
   return (
     <div className="my-plans-container">
@@ -72,7 +79,7 @@ export default function MyPlans() {
         ))}
       </div>
       <div className="displayed-plan">
-        <PlanDisplay displayData={allUserPlans[displayIndex].generated_plan} />
+        <PlanDisplay displayData={allUserPlans[displayIndex].generated_plan}  />
       </div> 
     </div>
   )
