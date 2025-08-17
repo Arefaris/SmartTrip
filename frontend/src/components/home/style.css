@@ -30,6 +30,7 @@
     justify-content: center;
     padding: 25px;
     border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     gap: 15px;
     backdrop-filter: blur(10px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
