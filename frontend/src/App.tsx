@@ -7,6 +7,7 @@ import './App.css'
 import Login from './components/login/Login'
 import Plan from './components/plan/Plan'
 import MyPlans from './components/myPlans/MyPlans'
+import GridBackground from './components/background/GridBackground'
 
 function App() {
   const navigate = useNavigate()
@@ -50,6 +51,7 @@ function App() {
             </div>
         
         </div>
+        <GridBackground></GridBackground>
           <Routes>
               <Route path='/' element={< Home />}></Route>
               <Route path='/register' element={< Register />}></Route>
