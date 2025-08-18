@@ -1,5 +1,5 @@
 #root {
-  width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -8,29 +8,29 @@
 
 body {
   margin: 0;
-  padding-top: 80px;
+  padding-top: 5rem; /* Use rem instead of px for consistency */
 }
 
 .header {
   display: flex;
-  width: 100vw;
-  height: 80px;
+  width: 100%;
+  height: 5rem; /* Use rem instead of px */
   background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 1.875rem; /* Convert 30px to rem (30/16) */
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.15);
 }
 
 .header .app-logo {
-  font-size: 32px;
+  font-size: 2rem; /* Convert 32px to rem */
   font-weight: 700;
   color: white;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.3);
 }
 
 .app-logo:hover {
@@ -41,20 +41,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 0.9375rem; /* Convert 15px to rem */
 }
 .log-register {
   display: flex;
-  gap: 15px;
+  gap: 0.9375rem; /* Convert 15px to rem */
 }
 
 .log-register button {
-  padding: 12px 24px;
-  border: 2px solid white;
-  border-radius: 25px;
+  padding: 0.75rem 1.5rem; /* Convert 12px 24px to rem */
+  border: 0.125rem solid white; /* Convert 2px to rem */
+  border-radius: 1.5625rem; /* Convert 25px to rem */
   background: transparent;
   color: white;
-  font-size: 16px;
+  font-size: 1rem; /* Convert 16px to rem */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -63,8 +63,8 @@ body {
 .log-register button:hover, .back-button:hover {
   background: white;
   color: #4b6cb7;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.125rem); /* Convert -2px to rem */
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.2); /* Convert 8px 20px to rem */
 }
 
 .log-register button:active {
@@ -74,14 +74,14 @@ body {
 .back-button {
   background: transparent;
   color: white;
-  border: 2px solid white;
-  padding: 10px 20px;
-  border-radius: 25px;
+  border: 0.125rem solid white; /* Convert 2px to rem */
+  padding: 0.625rem 1.25rem; /* Convert 10px 20px to rem */
+  border-radius: 1.5625rem; /* Convert 25px to rem */
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem); /* Convert 10px to rem */
   transition: all 0.3s ease;
-  margin-right: 15px;
+  margin-right: 0.9375rem; /* Convert 15px to rem */
 }
 

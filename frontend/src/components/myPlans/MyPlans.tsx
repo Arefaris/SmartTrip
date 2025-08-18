@@ -15,6 +15,7 @@ export default function MyPlans() {
     const {refreshToken } = useStore()
 
   useEffect(()=>{
+    window.scrollTo(0, 0);
     refreshToken()
     const fetchAllPlans = async ()=> {
         try {

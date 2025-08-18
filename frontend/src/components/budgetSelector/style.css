@@ -6,8 +6,8 @@
 .budget-selector .mantine-Input-input,
 .budget-selector .mantine-Select-input {
     width: 100% !important;
-    height: 85px !important;
-    min-height: 85px !important;
+    height: 65px !important;
+    min-height: 65px !important;
     border-radius: 12px;
     font-size: 16px;
 }

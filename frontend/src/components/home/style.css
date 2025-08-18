@@ -15,7 +15,7 @@
 
 
 .hero-title {
-    font-size: 44px;
+    font-size: 32px;
     font-weight: 400;
     color: white;
     text-align: center;
@@ -50,7 +50,7 @@
 
 .plan-btn {
     width: 200px;
-    height: 85px;
+    height: 65px;
     font-size: 24px;
     background-color: #F58A50;
     border-radius: 12px;

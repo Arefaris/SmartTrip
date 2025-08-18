@@ -17,7 +17,8 @@ export default function Plan() {
 
 
   useEffect(() => {
-    
+    //Scroll to top when component mounts
+    window.scrollTo(0, 0);
 
     const fetchPlan = async () => {
       try {
