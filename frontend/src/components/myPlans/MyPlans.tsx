@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import "./style.css"
 import { Loader } from '@mantine/core'
-import type { PlanData, AllUserPlans } from '../../types'
+import type { AllUserPlans } from '../../types'
 import PlanDisplay from '../plan/PlanDisplay'
 import useStore from '../../store/store'
 

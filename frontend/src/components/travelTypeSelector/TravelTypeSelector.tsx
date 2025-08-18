@@ -1,4 +1,3 @@
-import React from 'react'
 import { Select } from '@mantine/core';
 import useStore from '../../store/store';
 import './style.css';

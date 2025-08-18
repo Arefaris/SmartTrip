@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { DatePickerInput } from '@mantine/dates';
 import useStore from '../../store/store';
 import './style.css';

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useStore from '../../store/store';
 import { MultiSelect } from '@mantine/core';
 import "./style.css"

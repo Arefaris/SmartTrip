@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import axios from 'axios';
 import type { city_country } from '../../types';
 import useStore from '../../store/store';

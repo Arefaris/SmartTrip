@@ -1,4 +1,4 @@
-import React, { useRef, useState, type FormEvent } from 'react'
+import { useRef, useState, type FormEvent } from 'react'
 import { Input, Button, Loader } from '@mantine/core';
 import { useNavigate } from 'react-router'
 import useStore from '../../store/store'

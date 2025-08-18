@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import {Route, Routes, Link, useNavigate, Navigate, useLocation } from 'react-router'
+import { useEffect } from 'react'
+import {Route, Routes, useNavigate, useLocation } from 'react-router'
 import useStore from './store/store'
 import Register from './components/register/Register'
 import Home from './components/home/Home'
@@ -11,7 +11,7 @@ import MyPlans from './components/myPlans/MyPlans'
 function App() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { isAuthenticated, refreshToken, logout, user } = useStore()
+  const { isAuthenticated, refreshToken, logout } = useStore()
   
   //Show back button only on non-home pages
   const showBackButton = location.pathname !== '/'

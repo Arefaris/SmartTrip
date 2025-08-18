@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router'
 import useStore from '../../store/store';
 import axios from 'axios';
 import './style.css';
 import { Loader } from '@mantine/core';
 import PlanDisplay from './PlanDisplay';
-import type { Activity, DayPlan, PlanData } from '../../types';
+import type { PlanData } from '../../types';
 
 
 export default function Plan() {

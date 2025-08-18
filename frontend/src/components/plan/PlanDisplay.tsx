@@ -1,6 +1,4 @@
-import React from 'react'
 import type { PlanData, Activity, DayPlan } from '../../types';
-import { BackgroundImage } from '@mantine/core';
 
 
 export default function PlanDisplay({displayData} : {displayData: PlanData}) {
