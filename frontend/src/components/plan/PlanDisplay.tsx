@@ -41,7 +41,7 @@ export default function PlanDisplay({displayData} : {displayData: PlanData}) {
                       <div className="activity-content">
                         <h3 className="activity-title">{activity.title}</h3>
                         <p className="activity-description">{activity.description}</p>
-                        {activity.photo.url && (
+                        {activity.photo && activity.photo.url && (
                         <div>
                           <img 
                             src={activity.photo.url} 

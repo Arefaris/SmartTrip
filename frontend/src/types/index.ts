@@ -7,7 +7,7 @@ export type city_country = {
 export interface Activity {
   time: string;
   title: string;
-  photo: Photo;
+  photo?: Photo;
   description: string;
   notes?: string;
 }

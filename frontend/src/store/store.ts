@@ -12,6 +12,7 @@ type plan = {
   interests: string[],
   budget: string,
   traveler_type: string,
+  
 }
 
 const interests = [
