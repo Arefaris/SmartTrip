@@ -2,23 +2,79 @@ import { openai } from "../config/openAi";
 import { systemPrompt } from "../config/openAi";
 import { Plan } from "../types";
 import { getPhotos, PhotoResult } from "./pexelsModel";
-import { ChatCompletionCreateParams, ChatCompletionMessageParam, ChatCompletionTool } from "openai/resources/chat/completions";
+import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
-interface ToolCall {
-  id: string;
-  type: "function";
-  function: {
-    name: string;
-    arguments: string;
-  };
-}
 
+// Helper function to calculate photo calls based on trip duration
+const calculatePhotoCalls = (days: number): number => {
+  return Math.ceil(days / 2.5); // 1 photo every 2-3 days
+};
+
+// Function to select key activities for photo calls
+const selectPhotoActivities = (planData: any): string[] => {
+  const photoCalls = calculatePhotoCalls(planData.days);
+  const allActivities = planData.plan.flatMap((day: any) => 
+    day.activities.map((activity: any) => ({
+      title: activity.title,
+      dayIndex: day.day
+    }))
+  );
+  
+  // Distribute photo calls across the trip duration
+  const interval = Math.floor(allActivities.length / photoCalls);
+  const selectedActivities: string[] = [];
+  
+  for (let i = 0; i < photoCalls && i * interval < allActivities.length; i++) {
+    const activityIndex = i * interval;
+    selectedActivities.push(`${planData.location} ${allActivities[activityIndex].title}`);
+  }
+  
+  return selectedActivities;
+};
+
+// Function to add photos to the travel plan
+const addPhotosToplan = async (planData: any): Promise<any> => {
+  const photoLocations = selectPhotoActivities(planData);
+  console.log(`📸 Fetching ${photoLocations.length} photos for key locations...`);
+  
+  // Fetch photos for selected locations
+  const photoPromises = photoLocations.map(async (location, index) => {
+    try {
+      const photo = await getPhotos(location);
+      return { index, photo };
+    } catch (error) {
+      console.error(`Failed to get photo for ${location}:`, error);
+      return null;
+    }
+  });
+  
+  const photoResults = await Promise.all(photoPromises);
+  const validPhotos = photoResults.filter(result => result !== null);
+  
+  // Add photos to random activities, distributed across days
+  let photoIndex = 0;
+  const photosPerDay = Math.ceil(validPhotos.length / planData.days);
+  
+  planData.plan.forEach((day: any, dayIndex: number) => {
+    let photosAddedToday = 0;
+    day.activities.forEach((activity: any, activityIndex: number) => {
+      if (photoIndex < validPhotos.length && photosAddedToday < photosPerDay && 
+          (activityIndex === 0 || Math.random() > 0.7)) { // Favor first activity or random selection
+        activity.photo = validPhotos[photoIndex].photo;
+        photoIndex++;
+        photosAddedToday++;
+      }
+    });
+  });
+  
+  return planData;
+};
 
 export const gptResponse = async (plan: Plan) => {
   console.log("🚀 Generating travel plan for", plan.location, "-", plan.days, "days");
   
   try {
-    // Making sure that we are capped at 30 days
+    // Making sure that we are capped at 10 days
     if (plan.days > 10) {
       plan.days = 10;
     }
@@ -45,148 +101,47 @@ export const gptResponse = async (plan: Plan) => {
       }
     ];
 
-    const tools: ChatCompletionTool[] = [
-      {
-        type: "function",
-        function: {
-          name: "getPhotos",
-          description: "Get a photo for a specific location to enhance the travel itinerary",
-          parameters: {
-            type: "object",
-            properties: {
-              location: {
-                type: "string",
-                description: "The location, attraction, or place name to search for photos"
-              }
-            },
-            required: ["location"]
-          }
-        }
-      }
-    ];
-
-
     const response = await openai.chat.completions.create({
       model: "gpt-5-nano-2025-08-07",
       messages,
-      tools,
       response_format: { type: "json_object" },
       max_completion_tokens: maxTokens,
       top_p: 1,
-      // Optimize for speed
-      reasoning_effort: "low", // Reduce reasoning tokens for faster response
-      parallel_tool_calls: true // Enable parallel tool execution
+      reasoning_effort: "low"
     });
 
-    console.log("📊 Initial API call:", {
+    console.log("📊 API call:", {
       tokens: {
         prompt: response.usage?.prompt_tokens,
         completion: response.usage?.completion_tokens,
-        total: response.usage?.total_tokens,
-        reasoning: response.usage?.completion_tokens_details?.reasoning_tokens
+        total: response.usage?.total_tokens
       },
       finish_reason: response.choices[0]?.finish_reason,
       content_length: response.choices[0]?.message?.content?.length || 0
     });
 
-    // Handle function calls if present
-    const message = response.choices[0]?.message;
-    if (message?.tool_calls && message.tool_calls.length > 0) {
-      console.log("📸 Fetching", message.tool_calls.length, "photos in parallel...");
-      
-      // Add assistant message with tool calls
-      messages.push({
-        role: "assistant",
-        content: message.content,
-        tool_calls: message.tool_calls
-      });
-
-      // Execute function calls in parallel for better performance
-      const photoPromises = message.tool_calls
-        .filter(toolCall => toolCall.type === "function" && toolCall.function?.name === "getPhotos")
-        .map(async (toolCall) => {
-          if (toolCall.type === "function" && toolCall.function) {
-            try {
-              const args = JSON.parse(toolCall.function.arguments);
-              const photoResult: PhotoResult = await getPhotos(args.location);
-              
-              return {
-                role: "tool" as const,
-                tool_call_id: toolCall.id,
-                content: JSON.stringify(photoResult)
-              };
-            } catch (error: any) {
-              console.error("Photo fetch failed:", error.message);
-              return {
-                role: "tool" as const,
-                tool_call_id: toolCall.id,
-                content: JSON.stringify({ error: "Failed to get photo" })
-              };
-            }
-          }
-          
-          return {
-            role: "tool" as const,
-            tool_call_id: toolCall.id,
-            content: JSON.stringify({ error: "Invalid tool call" })
-          };
-        });
-
-      // Wait for all photo fetches to complete in parallel
-      const photoResults = await Promise.all(photoPromises);
-      
-      // Add all results to messages
-      messages.push(...photoResults);
-
-      const finalResponse = await openai.chat.completions.create({
-        model: "gpt-5-mini-2025-08-07",
-        messages,
-        response_format: { type: "json_object" },
-        max_completion_tokens: maxTokens,
-        top_p: 1,
-        reasoning_effort: "low"
-      });
-
-      console.log("📊 Final API call:", {
-        tokens: {
-          prompt: finalResponse.usage?.prompt_tokens,
-          completion: finalResponse.usage?.completion_tokens,
-          total: finalResponse.usage?.total_tokens,
-          reasoning: finalResponse.usage?.completion_tokens_details?.reasoning_tokens
-        },
-        finish_reason: finalResponse.choices[0]?.finish_reason,
-        content_length: finalResponse.choices[0]?.message?.content?.length || 0
-      });
-      
-      const totalTokensUsed = (response.usage?.total_tokens || 0) + (finalResponse.usage?.total_tokens || 0);
-      console.log("Total tokens used:", totalTokensUsed);
-      console.log("Plan generated successfully with photos");
-      return {
-        choices: [{
-          message: {
-            content: finalResponse.choices[0]?.message?.content || ""
-          }
-        }]
-      };
+    const content = response.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error("No content received from OpenAI");
     }
 
-    console.log("Plan generated successfully (no photos)");
+    // Parse the JSON response
+    const planData = JSON.parse(content);
+    
+    // Add photos to the plan
+    const planWithPhotos = await addPhotosToplan(planData);
+    
+    console.log("Plan generated successfully with photos");
     return {
       choices: [{
         message: {
-          content: message?.content || ""
+          content: JSON.stringify(planWithPhotos)
         }
       }]
     };
   } catch (e: any) {
     console.error("Plan generation failed:", e.message);
-    return {
-      choices: [{
-        message: {
-          content: JSON.stringify({ error: "Failed to generate plan" })
-        }
-      }]
-    };
+    throw new Error(`Failed to generate plan: ${e.message}`);
   }
 }
 
