@@ -14,7 +14,7 @@ const popularLocations = [
 export default function GridBackground() {
   return (
     <div className="grid-background">
-      {popularLocations.map((location, index) => (
+      {popularLocations.map((location) => (
         <div
           key={location.name}
           className="grid-image"
