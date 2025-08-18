@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx tsx --watch app.ts",
+    "start": "npx tsx app.ts",
+    "build": "echo 'No build step required for TypeScript with tsx'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

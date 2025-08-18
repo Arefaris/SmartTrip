@@ -4,7 +4,10 @@ import { userRouter } from "./routes/userRoute"
 import { apiLimiter } from "./middlewares/rateLimiter"
 import cors from "cors"
 import cookieParser from "cookie-parser"
-import helmet from "helmet";
+import helmet from "helmet"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const app = e()
 
@@ -13,12 +16,14 @@ app.use(helmet());
 
 app.use(cors({
     credentials: true,
-    origin: ["http://localhost:5173"]
+    origin: process.env.NODE_ENV === 'production' 
+        ? process.env.FRONTEND_URL?.split(',') || []
+        : ["http://localhost:5173"]
 }))
 
 app.use(e.json()) // body parser for post requests
 app.use(cookieParser()) // cookie parser for reading cookies
-const PORT = 5001 //TODO: add port from env
+const PORT = process.env.PORT || 5001
 
 
 app.listen(PORT, ()=>{
