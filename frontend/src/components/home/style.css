@@ -82,3 +82,47 @@
     box-shadow: none;
     transform: none;
 }
+
+
+@media (max-width: 768px) {
+     .flex {
+        width: 470px;
+    }
+
+     .interests-selector {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .home {
+        font-size: 0.7rem;
+    }
+
+    .flex {
+        width: 300px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+    .budget-selector {
+        display: none;
+    }
+
+    .budget-travel-cont {
+        display: none;
+    }
+
+    .interests-selector {
+        display: none;
+    }
+
+    .country-date-travel {
+        flex-direction: column;
+    }
+    .plan-btn {
+        margin-top: 10px;
+        align-self: center;
+    }
+}
