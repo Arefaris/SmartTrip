@@ -66,13 +66,13 @@ const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
       plan: {
-        location: '',
-        days: 0,
-        start_date: '',
-        end_date: '',
-        interests: [],
-        budget: '',
-        traveler_type: ''
+        location: 'USA',
+        days: 5,
+        start_date: '2025-09-09',
+        end_date: '2025-09-16',
+        interests: ['Adventure'],
+        budget: 'Economy / Good for travelers who want to save money or backpack.',
+        traveler_type: 'Solo'
       },
       interests: interests,
       travelerTypes: travelerTypes,

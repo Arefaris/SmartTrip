@@ -72,7 +72,7 @@ export default function MyPlans() {
             key={index}
             className={`plan-item ${displayIndex === index ? 'active' : ''}`}
           >
-            <div className="plan-location">{plan.generated_plan.location}</div>
+            {plan.generated_plan.location}
             <div className="plan-meta">
               {plan.days} days • {plan.generated_plan.start_date}
             </div>

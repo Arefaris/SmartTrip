@@ -87,39 +87,23 @@ body {
   margin-right: 0.9375rem; /* Convert 15px to rem */
 }
 
-@media (max-width: 1200px) {
-  .grid-background {
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 1.5rem;
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .grid-background {
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(9rem, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-    opacity: 0.7;
-  }
-  
-  .location-name {
-    font-size: 0.8rem;
-  }
-}
 
 @media (max-width: 480px) {
    .logo-cont {
   margin-right: 10px;
 }
 
-.log-register button {
+.log-register button, .back-button {
   font-size: 0.8rem;
   font-weight: 400;
   padding: 0.5rem 1rem;
+  
 }
 
+.back-button {
+  margin-right: 0.2rem;
+  width: 66px;
+  height: 31px;
+}
 
 }

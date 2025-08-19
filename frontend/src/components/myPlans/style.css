@@ -123,16 +123,35 @@
 @media (max-width: 768px) {
   .my-plans-container {
     flex-direction: column;
-    height: auto;
+   
+  }
+
+  .plan-item {
+    width: 300px;
+    height: 50px !important;
+    box-sizing: border-box;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 18px;
   }
   
   .side-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0px;
     width: 100%;
     border-radius: 0;
     max-height: 40vh;
+    
   }
   
   .displayed-plan {
     padding: 20px;
   }
+
+
+
 }
