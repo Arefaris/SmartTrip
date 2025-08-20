@@ -13,6 +13,18 @@
     font-size: 16px;
 }
 
+.complete-loader-cont {
+    display: flex;
+     width: 100% ;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.inpt-loader {
+   position: absolute;
+   top: 45px;
+   right: 10px;
+}
 .country-selector .mantine-Input-input:focus,
 .country-selector .mantine-Autocomplete-input:focus {
     border-color: #F58A50;

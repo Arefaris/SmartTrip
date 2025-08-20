@@ -126,6 +126,14 @@
         font-size: 0.7rem;
     }
 
+    .complete-loader-cont {
+    display: flex;
+     width: 200px ;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
     .country-selector {
         width: 200px;
     }
