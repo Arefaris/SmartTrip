@@ -45,12 +45,32 @@ const travelerTypes = [
   "Budget traveler",
 ];
 
+const popularDestinations = [
+  {
+    title: "Japan",
+    img: "./images/popularDest/Japan.jpg"
+  },
+  {
+    title: "Italy",
+    img: "./images/popularDest/Italy.jpg"
+  },
+  {
+    title: "France",
+    img: "./images/popularDest/France.jpg"
+  },
+  {
+    title: "Greece",
+    img: "./images/popularDest/Greece.jpg"
+  }
+];
+
 
 
 interface StoreState {
   plan: plan,
   interests: string[]
   travelerTypes: string[],
+  popularDestinations: { title: string; img: string }[],
   user: any,
   token: string | null,
   isAuthenticated: boolean,
@@ -76,6 +96,7 @@ const useStore = create<StoreState>()(
       },
       interests: interests,
       travelerTypes: travelerTypes,
+      popularDestinations: popularDestinations,
       user: null,
       token: null,
       isAuthenticated: false,

@@ -35,7 +35,28 @@
     backdrop-filter: blur(10px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
+.dest-cont {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+   
+}
 
+.popular-dest-img {
+     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.popular-dest-img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.popular-dest-title {
+    font-size: 16px;
+    
+}
+.popular-dest-img {
+    width: 170px;
+    border-radius: 14px;
+}
 .country-date-travel {
     display: flex;
     align-items: center;
@@ -85,6 +106,12 @@
 
 
 @media (max-width: 768px) {
+    .index-dest-3 {
+        display: none;
+    }
+    .index-dest-2 {
+        display: none;
+    }
      .flex {
         width: 470px;
     }
@@ -99,6 +126,21 @@
         font-size: 0.7rem;
     }
 
+    .country-selector {
+        width: 200px;
+    }
+
+    .dest-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+    .index-dest-3 {
+        display: none;
+    }
+    .index-dest-2 {
+        display: none;
+    }
     .flex {
         width: 300px;
     }
