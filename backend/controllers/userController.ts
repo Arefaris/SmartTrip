@@ -103,6 +103,8 @@ export const loginUser = async (req: Request, res: Response) => {
             res.cookie("token", accessToken, {
                 maxAge: 7 * 24 * 60 * 60 * 1000, //7 days in milliseconds
                 httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
             })
 
 
@@ -122,15 +124,20 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const logOutUser = (req: Request, res: Response) => {
         try {
-            res.clearCookie("token");
+            res.clearCookie("token", {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+            });
 
             if(req.cookies && req.cookies.token) {
                 delete req.cookies.token;
             }
-            res.sendStatus(200)
+            
+            res.status(200).json({ message: "Logged out successfully" });
         }catch (error){
             console.log(error)
-            res.sendStatus(500)
+            res.status(500).json({ message: "Logout failed" });
         }
     }
 
@@ -154,7 +161,9 @@ export const verifyAuth = (req: Request, res: Response) => {
 
         res.cookie("token", newToken, {
             maxAge: 60 * 60 * 1000, //60 minutes in milliseconds
-            httpOnly: true
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
         })
 
         res.status(200).json({
