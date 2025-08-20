@@ -1,5 +1,5 @@
 import { OpenAI } from "openai";
-
+// open ai config and prompt
 export const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const systemPrompt = `You are a professional travel planner. Your task is to create detailed, personalized travel itineraries.

@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-// this input validation configuration
+// this is input validation configuration
 
 export const registerSchema: Joi.ObjectSchema = Joi.object({
       email: Joi.string()

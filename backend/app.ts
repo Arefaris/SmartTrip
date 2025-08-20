@@ -17,7 +17,7 @@ app.use(helmet());
 app.use(cors({
     credentials: true,
     origin: process.env.NODE_ENV === 'production' 
-        ? process.env.FRONTEND_URL?.split(',') || []
+        ? process.env.FRONTEND_URL?.split(',').map(url => url.trim()).filter(url => url) || []
         : ["http://localhost:5173"]
 }))
 
