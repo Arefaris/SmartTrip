@@ -39,7 +39,7 @@ export default function PlanDisplay({displayData} : {displayData: PlanData}) {
                       
                       <div className="activity-time">{activity.time}</div>
                       <div className="activity-content">
-                        <h3 className="activity-title">{activity.title}</h3>
+                        <h3 className="activity-title">{activity.title}  <div></div></h3>
                         <p className="activity-description">{activity.description}</p>
                         {activity.photo && activity.photo.url && (
                         <div>
@@ -61,8 +61,10 @@ export default function PlanDisplay({displayData} : {displayData: PlanData}) {
                               View photographer's profile
                             </a>
                           </div>
+                          
                         </div>
                       )}
+                     <a href={`https://maps.google.com/maps?q=${encodeURIComponent(activity.title)}`} target='_blank' >📌 Location</a>
                       </div>
                     </div>
                   ))}
