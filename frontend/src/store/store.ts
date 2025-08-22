@@ -48,19 +48,27 @@ const travelerTypes = [
 const popularDestinations = [
   {
     title: "Japan",
-    img: "./images/popularDest/Japan.jpg"
+    img: "./images/optimized/popularDest/Japan.webp",
+    imgMobile: "./images/optimized/popularDest/Japan-mobile.webp",
+    imgFallback: "./images/popularDest/Japan.jpg"
   },
   {
     title: "Italy",
-    img: "./images/popularDest/Italy.jpg"
+    img: "./images/optimized/popularDest/Italy.webp",
+    imgMobile: "./images/optimized/popularDest/Italy-mobile.webp",
+    imgFallback: "./images/popularDest/Italy.jpg"
   },
   {
     title: "France",
-    img: "./images/popularDest/France.jpg"
+    img: "./images/optimized/popularDest/France.webp",
+    imgMobile: "./images/optimized/popularDest/France-mobile.webp",
+    imgFallback: "./images/popularDest/France.jpg"
   },
   {
     title: "Greece",
-    img: "./images/popularDest/Greece.jpg"
+    img: "./images/optimized/popularDest/Greece.webp",
+    imgMobile: "./images/optimized/popularDest/Greece-mobile.webp",
+    imgFallback: "./images/popularDest/Greece.jpg"
   }
 ];
 
@@ -70,7 +78,7 @@ interface StoreState {
   plan: plan,
   interests: string[]
   travelerTypes: string[],
-  popularDestinations: { title: string; img: string }[],
+  popularDestinations: { title: string; img: string; imgMobile: string; imgFallback: string }[],
   user: any,
   token: string | null,
   isAuthenticated: boolean,

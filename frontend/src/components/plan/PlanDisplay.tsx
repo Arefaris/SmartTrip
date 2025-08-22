@@ -64,7 +64,14 @@ export default function PlanDisplay({displayData} : {displayData: PlanData}) {
                           
                         </div>
                       )}
-                     <a href={`https://maps.google.com/maps?q=${encodeURIComponent(activity.title)}`} target='_blank' >📌 Location</a>
+                        <a 
+                          href={`https://maps.google.com/maps?q=${encodeURIComponent(activity.title)}`} 
+                          target='_blank' 
+                          rel="noopener noreferrer"
+                          className="location-link"
+                        >
+                          📍 View on Maps
+                        </a>
                       </div>
                     </div>
                   ))}
