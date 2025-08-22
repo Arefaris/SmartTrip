@@ -1,4 +1,3 @@
-import React from 'react'
 import useStore from '../../store/store';
 import { useNavigate } from 'react-router'
 import ResponsiveImage from '../common/ResponsiveImage'
