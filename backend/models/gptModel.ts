@@ -16,8 +16,7 @@ async function addPhotosToPlan(planData: any): Promise<any> {
   // Add 1 photo to the first activity of each day
   planData.plan.forEach((day: any) => {
     if (day.activities.length > 0) {
-      const rngActivity = Math.floor(Math.random() * day.activities.length)
-      const firstActivity = day.activities[rngActivity];
+      const firstActivity = day.activities[0];
       const searchQuery = `${planData.location} ${firstActivity.title}`;
       
       const photoPromise = getPhotos(searchQuery)
