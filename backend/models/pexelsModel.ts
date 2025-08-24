@@ -6,6 +6,7 @@ export interface PhotoResult {
   photographer: string;
   photographer_url: string;
 }
+
 `{
   "total_results": 10000,
   "page": 1,

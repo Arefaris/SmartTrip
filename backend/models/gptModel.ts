@@ -9,7 +9,6 @@ import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
 // This function adds photos into the plan data.
 async function addPhotosToPlan(planData: any): Promise<any> {
-  console.log(`📸 Getting 1 photo per day...`);
 
   const photoPromises: Promise<any>[] = [];
 
@@ -22,11 +21,10 @@ async function addPhotosToPlan(planData: any): Promise<any> {
       const photoPromise = getPhotos(searchQuery)
         .then((photo) => {
           firstActivity.photo = photo;
-          console.log(`✅ Day ${day.day}: Added photo for ${searchQuery}`);
           return { success: true, day: day.day, activity: firstActivity.title };
         })
         .catch((error) => {
-          console.error(`❌ Day ${day.day}: Failed photo for ${searchQuery}`, error);
+          console.error(`Day ${day.day}: Failed photo for ${searchQuery}`, error);
           return { success: false, day: day.day, activity: firstActivity.title };
         });
       
@@ -38,13 +36,13 @@ async function addPhotosToPlan(planData: any): Promise<any> {
   const results = await Promise.all(photoPromises);
   const successCount = results.filter(r => r.success).length;
   
-  console.log(`📸 Successfully added ${successCount}/${planData.days} photos`);
+  console.log(`Successfully added ${successCount}/${planData.days} photos`);
 
   return planData;
 }
 
 export const gptResponse = async (plan: Plan) => {
-  console.log("🚀 Generating travel plan for", plan.location, "-", plan.days, "days");
+  console.log("Generating travel plan for", plan.location, "-", plan.days, "days");
   
   try {
     // Making sure that we are capped at 10 days
@@ -83,15 +81,6 @@ export const gptResponse = async (plan: Plan) => {
       reasoning_effort: "low"
     });
 
-    console.log("📊 API call:", {
-      tokens: {
-        prompt: response.usage?.prompt_tokens,
-        completion: response.usage?.completion_tokens,
-        total: response.usage?.total_tokens
-      },
-      finish_reason: response.choices[0]?.finish_reason,
-      content_length: response.choices[0]?.message?.content?.length || 0
-    });
 
     const content = response.choices[0]?.message?.content;
     if (!content) {
@@ -129,6 +118,6 @@ export const gptResponse = async (plan: Plan) => {
     // Cap at reasonable limits to avoid waste
     const cappedTokens = Math.min(calculated, 20000);
     
-    console.log(`📊 Token allocation for ${days} days: ${cappedTokens} tokens`);
+    console.log(`Token allocation for ${days} days: ${cappedTokens} tokens`);
     return cappedTokens;
   };

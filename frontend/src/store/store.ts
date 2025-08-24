@@ -89,6 +89,8 @@ interface StoreState {
 }
 
 
+//Zustand store with localStorage persistence - automatically saves/restores plan data on page reload
+//Manages global state for travel plans, user auth, and app configuration data
 const useStore = create<StoreState>()(
   // automatically saves state to localStorage and restores it on page reload
   persist(

@@ -41,14 +41,6 @@ export const createPlan = async (plan: Plan, userid: string | null) => {
             .replace(/[\u0001-\u001F\u007F-\u009F]/g, '') // Remove control characters
             .trim();
         
-        // Log content details for debugging
-        console.log("📄 Generated content details:", {
-          length: planContent?.length || 0,
-          firstChars: planContent?.substring(0, 100) + "...",
-          lastChars: "..." + planContent?.substring(planContent.length - 100),
-          startsWithBrace: planContent?.startsWith("{"),
-          endsWithBrace: planContent?.endsWith("}"),
-        });
         
         const [returnPlan] = await trx("plan").insert({
             location: plan.location.toLowerCase(),
@@ -61,6 +53,7 @@ export const createPlan = async (plan: Plan, userid: string | null) => {
             hash: hash,
             generated_plan: planContent
         }, ["generated_plan", "id"])
+        
         console.log(userid)
         // if user id was provided (user logged in)
         if (userid){

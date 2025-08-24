@@ -28,7 +28,7 @@ export const optionalAuth = (req: Request, res: Response, next: NextFunction) =>
     const token = req.cookies?.token;
     
     if (!token) {
-        // No token, but that's okay - continue without user
+        // No token, continue without user
         req.user = undefined;
         return next();
     }
