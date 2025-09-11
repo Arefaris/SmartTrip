@@ -109,6 +109,11 @@
     .index-dest-3 {
         display: none;
     }
+
+      .plan-btn {
+       font-size: 1.5rem;
+    }
+   
     .index-dest-2 {
         display: none;
     }
@@ -125,7 +130,7 @@
     .home {
         font-size: 0.7rem;
     }
-
+   
     .complete-loader-cont {
     display: flex;
      width: 200px ;
