@@ -2,7 +2,9 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import axios from 'axios'
 const url = import.meta.env.VITE_BASE_URL
-
+const today = new Date();
+const futureDate = new Date(today);
+futureDate.setDate(today.getDate() + 5);
 
 type plan = {
   location: string,
@@ -98,8 +100,8 @@ const useStore = create<StoreState>()(
       plan: {
         location: 'USA',
         days: 5,
-        start_date: '2025-09-09',
-        end_date: '2025-09-16',
+        start_date: today.toLocaleDateString('en-CA'),
+        end_date: futureDate.toLocaleDateString('en-CA'),
         interests: ['Adventure'],
         budget: 'Economy / Good for travelers who want to save money or backpack.',
         traveler_type: 'Solo'
