@@ -5,9 +5,6 @@ import { getUserPlans } from "../models/planModel"
 export const planController = async (req: Request, res: Response)=>{
     try {
        
-        // if(!req.user?.userid) {
-        //     return res.status(401).json({ error: "No user id" })
-        // }
         
         const plan = await createPlan(req.body, req.user?.userid ? req.user?.userid : null)
         
