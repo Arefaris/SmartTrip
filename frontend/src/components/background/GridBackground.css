@@ -8,7 +8,7 @@
   z-index: 0;
 
   /* Place your static background image here */
-  background-image: url('./images/collage.webp');
+  background-image: url('/images/collage.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
