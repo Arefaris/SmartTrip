@@ -1,6 +1,5 @@
 import useStore from '../../store/store';
 import { useNavigate } from 'react-router'
-import ResponsiveImage from '../common/ResponsiveImage'
 
 
 export default function PopularDestinations() {
@@ -39,13 +38,12 @@ export default function PopularDestinations() {
         <div className="dest-cont">
           {popularDestinations && popularDestinations.map((dest, index) => {
            return <div onClick={() => {handlePopularDest(index)}} key={index} className={`index-dest-${index}`}>
-            
-            <ResponsiveImage 
+
+            <img
               className="popular-dest-img"
               src={dest.img}
-              srcMobile={dest.imgMobile}
-              fallback={dest.imgFallback}
               alt={`${dest.title} destination`}
+              loading="lazy"
             />
             <div className="popular-dest-title">{dest.title}</div>
             </div>
